@@ -3,17 +3,38 @@
 <head>
   <meta charset="utf-8">
   
-  <title>云运维</title>
+  <title>业务安全漏洞挖掘归纳总结 | 云运维</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description">
-<meta property="og:type" content="website">
-<meta property="og:title" content="云运维">
-<meta property="og:url" content="http://yunops.top/index.html">
+  <meta name="description" content="0x00 索引说明
+6.30在OWASP的分享，关于业务安全的漏洞检测模型。进一步的延伸科普。
+0x01 身份认证安全1.暴力破解在没有验证码限制或者一次验证码可以多次使用的地方，使用已知用户对密码进行暴力破解或者用一个通用密码对用户进行暴力破解。 简单的验证码爆破。URL: http://zone.wooyun.org/content/20839
+一些工具及脚本
+Burpsuite
+htpwdS">
+<meta property="og:type" content="article">
+<meta property="og:title" content="业务安全漏洞挖掘归纳总结">
+<meta property="og:url" content="http://yunops.top/2015/07/07/业务安全漏洞挖掘归纳总结/index.html">
 <meta property="og:site_name" content="云运维">
-<meta property="og:description">
+<meta property="og:description" content="0x00 索引说明
+6.30在OWASP的分享，关于业务安全的漏洞检测模型。进一步的延伸科普。
+0x01 身份认证安全1.暴力破解在没有验证码限制或者一次验证码可以多次使用的地方，使用已知用户对密码进行暴力破解或者用一个通用密码对用户进行暴力破解。 简单的验证码爆破。URL: http://zone.wooyun.org/content/20839
+一些工具及脚本
+Burpsuite
+htpwdS">
+<meta property="og:image" content="http://static.wooyun.org//drops/20150703/2015070302312847097.png">
+<meta property="og:image" content="http://static.wooyun.org//drops/20150703/2015070302312815571.png">
+<meta property="og:image" content="http://static.wooyun.org//drops/20150703/2015070302312839779.png">
+<meta property="og:image" content="http://static.wooyun.org//drops/20150703/2015070302312854742.png">
+<meta property="og:image" content="http://static.wooyun.org//drops/20150703/2015070302312971068.png">
+<meta property="og:updated_time" content="2015-07-07T12:08:05.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="云运维">
-<meta name="twitter:description">
+<meta name="twitter:title" content="业务安全漏洞挖掘归纳总结">
+<meta name="twitter:description" content="0x00 索引说明
+6.30在OWASP的分享，关于业务安全的漏洞检测模型。进一步的延伸科普。
+0x01 身份认证安全1.暴力破解在没有验证码限制或者一次验证码可以多次使用的地方，使用已知用户对密码进行暴力破解或者用一个通用密码对用户进行暴力破解。 简单的验证码爆破。URL: http://zone.wooyun.org/content/20839
+一些工具及脚本
+Burpsuite
+htpwdS">
   
     <link rel="alternative" href="/atom.xml" title="云运维" type="application/atom+xml">
   
@@ -173,9 +194,7 @@
 		</header>				
 	</div>
 </nav>
-      <div class="body-wrap">
-  
-    <article id="post-业务安全漏洞挖掘归纳总结" class="article article-type-post" itemscope itemprop="blogPost">
+      <div class="body-wrap"><article id="post-业务安全漏洞挖掘归纳总结" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
       <a href="/2015/07/07/业务安全漏洞挖掘归纳总结/" class="article-date">
@@ -191,12 +210,23 @@
       <header class="article-header">
         
   
-    <h1 itemprop="name">
-      <a class="article-title" href="/2015/07/07/业务安全漏洞挖掘归纳总结/">业务安全漏洞挖掘归纳总结</a>
+    <h1 class="article-title" itemprop="name">
+      业务安全漏洞挖掘归纳总结
     </h1>
   
 
       </header>
+      
+      <div class="article-info article-info-post">
+        
+	<div class="article-tag tagcloud">
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/safe/">safe</a></li></ul>
+	</div>
+
+        
+
+        <div class="clearfix"></div>
+      </div>
       
     
     <div class="article-entry" itemprop="articleBody">
@@ -381,241 +411,62 @@
       
     </div>
     
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/safe/">safe</a></li></ul>
-	</div>
-
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-    
   </div>
+  
+    
+<nav id="article-nav">
+  
+  
+    <a href="/2015/07/07/MariaDB Galera Cluster 部署/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">MariaDB Galera Cluster 部署（如何快速部署 MariaDB 集群）</div>
+      <strong class="article-nav-caption">></strong>
+    </a>
+  
+</nav>
+
   
 </article>
 
 
-
-
-
-
-
-  
-    <article id="post-MariaDB Galera Cluster 部署" class="article article-type-post" itemscope itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a href="/2015/07/07/MariaDB Galera Cluster 部署/" class="article-date">
-  	<time datetime="2015-07-06T23:07:07.000Z" itemprop="datePublished">2015-07-07</time>
-</a>
-    </div>
-  
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2015/07/07/MariaDB Galera Cluster 部署/">MariaDB Galera Cluster 部署（如何快速部署 MariaDB 集群）</a>
-    </h1>
-  
-
-      </header>
-      
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>MariaDB作为Mysql的一个分支，在开源项目中已经广泛使用，例如大热的openstack，所以，为了保证服务的高可用性，同时提高系统的负载能力，集群部署是必不可少的。</p>
-<h4 id="MariaDB_Galera_Cluster_介绍">MariaDB Galera Cluster 介绍</h4><hr>
-<p>MariaDB集群是MariaDB同步多主机集群。它仅支持XtraDB/ InnoDB存储引擎（虽然有对MyISAM实验支持 - 看wsrep_replicate_myisam系统变量）。</p>
-<h4 id="主要功能:">主要功能:</h4><ul>
-<li>同步复制</li>
-<li>真正的multi-master，即所有节点可以同时读写数据库</li>
-<li>自动的节点成员控制，失效节点自动被清除</li>
-<li>新节点加入数据自动复制</li>
-<li>真正的并行复制，行级</li>
-<li>用户可以直接连接集群，使用感受上与MySQL完全一致</li>
-</ul>
-<h4 id="优势：">优势：</h4><ul>
-<li>因为是多主，所以不存在Slavelag(延迟)</li>
-<li>不存在丢失事务的情况</li>
-<li>同时具有读和写的扩展能力</li>
-<li>更小的客户端延迟</li>
-<li>节点间数据是同步的,而Master/Slave模式是异步的,不同slave上的binlog可能是不同的</li>
-</ul>
-<h4 id="技术:">技术:</h4><p>Galera集群的复制功能基于Galeralibrary实现,为了让MySQL与Galera library通讯，特别针对MySQL开发了wsrep API。</p>
-<p>Galera插件保证集群同步数据，保持数据的一致性，靠的就是可认证的复制，工作原理如下图：</p>
-<p><img src="http://7xk2is.com1.z0.glb.clouddn.com/mariadb-galera-cluster.png" alt="images"></p>
-<p>当客户端发出一个commit的指令，在事务被提交之前，所有对数据库的更改都会被write-set收集起来,并且将 write-set 纪录的内容发送给其他节点。</p>
-<p>write-set 将在每个节点进行认证测试，测试结果决定着节点是否应用write-set更改数据。</p>
-<p>如果认证测试失败，节点将丢弃 write-set ；如果认证测试成功，则事务提交。</p>
-<h4 id="1-安装环境准备">1.安装环境准备</h4><p><br><br>安装MariaDB集群至少需要3台服务器（如果只有两台的话需要特殊配置，请参照官方文档）</p>
-<p>在这里，我列出试验机器的配置：</p>
-<p>操作系统版本：centos7</p>
-<p>node4:10.128.20.16 node5:10.128.20.17 node6:10.128.20.18</p>
-<p>以第一行为例，node4为 hostname ，10.128.20.16为 ip ，在三台机器修改 /etc/hosts文件，我的文件如下：</p>
-<pre><code>10<span class="class">.128</span><span class="class">.20</span><span class="class">.16</span> <span class="tag">node4</span>
-10<span class="class">.128</span><span class="class">.20</span><span class="class">.17</span> <span class="tag">node5</span>
-10<span class="class">.128</span><span class="class">.20</span><span class="class">.18</span> <span class="tag">node6</span>
-</code></pre><p>为了保证节点间相互通信，需要禁用防火墙设置（如果需要防火墙，则参照官方网站增加防火墙信息设置）</p>
-<p>在三个节点分别执行命令：</p>
-<pre><code>systemctl <span class="keyword">stop</span> firewalld
-</code></pre><p>然后将/etc/sysconfig/selinux 的 selinux 设置成 disabled ,这样初始化环境就完成了。</p>
-<h4 id="2-安装_MariaDB_Galera_Cluster">2.安装 MariaDB Galera Cluster</h4><pre><code>[root<span class="property">@node4</span> ~]<span class="comment"># yum install -y mariadb mariadb-galera-server mariadb-galera-common galera rsync</span>
-
-[root<span class="property">@node5</span> ~]<span class="comment"># yum install -y mariadb mariadb-galera-server mariadb-galera-common galera rsync</span>
-
-[root<span class="property">@node6</span> ~]<span class="comment"># yum install -y mariadb mariadb-galera-server mariadb-galera-common galera rsync</span>
-</code></pre><h4 id="3-配置_MariaDB_Galera_Cluster">3.配置 MariaDB Galera Cluster</h4><p>初始化数据库服务，只在一个节点进行</p>
-<pre><code>[root@node4 mariadb]<span class="preprocessor"># systemctl start mariadb</span>
-[root@node4 mariadb]<span class="preprocessor"># mysql_secure_installation</span>
-
-NOTE: RUNNING ALL PARTS <span class="keyword">OF</span> THIS SCRIPT <span class="keyword">IS</span> RECOMMENDED <span class="keyword">FOR</span> ALL MariaDB
-SERVERS <span class="keyword">IN</span> PRODUCTION USE! PLEASE READ <span class="keyword">EACH</span> <span class="keyword">STEP</span> CAREFULLY!
-
-<span class="keyword">In</span> <span class="keyword">order</span> <span class="keyword">to</span> log <span class="keyword">into</span> MariaDB <span class="keyword">to</span> secure it, we<span class="comment">'ll need the current</span>
-password <span class="keyword">for</span> the root user. <span class="keyword">If</span> you<span class="comment">'ve just installed MariaDB, and</span>
-you haven<span class="comment">'t set the root password yet, the password will be blank,</span>
-so you should just press enter here.
-
-Enter current password <span class="keyword">for</span> root (enter <span class="keyword">for</span> none):
-OK, successfully used password, moving <span class="keyword">on</span>...
-
-Setting the root password ensures that nobody can log <span class="keyword">into</span> the MariaDB
-root user without the proper authorisation.
-
-<span class="keyword">Set</span> root password? [Y/n]
-<span class="keyword">New</span> password:
-Re-enter <span class="keyword">new</span> password:
-Password updated successfully!
-Reloading privilege tables..
-... Success!
-
-<span class="keyword">By</span> <span class="keyword">default</span>, a MariaDB installation has an anonymous user, allowing     anyone
-<span class="keyword">to</span> log <span class="keyword">into</span> MariaDB without having <span class="keyword">to</span> have a user account created <span class="keyword">for</span>
-them. This <span class="keyword">is</span> intended only <span class="keyword">for</span> testing, <span class="keyword">and</span> <span class="keyword">to</span> make the installation
-go a bit smoother. You should remove them before moving <span class="keyword">into</span> a
-production environment.
-
-Remove anonymous users? [Y/n] n
-... skipping.
-
-Normally, root should only be allowed <span class="keyword">to</span> connect <span class="keyword">from</span> <span class="comment">'localhost'. This</span>
-ensures that someone cannot guess at the root password <span class="keyword">from</span> the network.
-
-Disallow root login remotely? [Y/n] y
-... Success!
-
-<span class="keyword">By</span> <span class="keyword">default</span>, MariaDB comes <span class="keyword">with</span> a database named <span class="comment">'test' that anyone can</span>
-access. This <span class="keyword">is</span> also intended only <span class="keyword">for</span> testing, <span class="keyword">and</span> should be removed
-before moving <span class="keyword">into</span> a production environment.
-
-Remove test database <span class="keyword">and</span> access <span class="keyword">to</span> it? [Y/n] n
-... skipping.
-
-Reloading the privilege tables will ensure that all changes made so far
-will <span class="keyword">take</span> effect immediately.
-
-Reload privilege tables now? [Y/n] y
-... Success!
-
-Cleaning up...
-
-All done! <span class="keyword">If</span> you<span class="comment">'ve completed all of the above steps, your MariaDB</span>
-installation should now be secure.
-
-Thanks <span class="keyword">for</span> <span class="keyword">using</span> MariaDB!
-</code></pre><p>关闭数据库，修改 /etc/my.cnf.d/galera.cnf</p>
-<pre><code>[root<span class="property">@node4</span> mariadb]<span class="comment"># systemctl stop mariadb</span>
-[root<span class="property">@node4</span> ~]<span class="comment"># vim /etc/my.cnf.d/galera.cnf</span>
-</code></pre><p>修改以下内容：</p>
-<pre><code>[mysqld]
-......
-<span class="variable">wsrep_provider =</span> /usr/lib64/galera/libgalera_smm.so
-<span class="variable">wsrep_cluster_address =</span> <span class="string">"gcomm://node4,node5,node6"</span>
-<span class="variable">wsrep_node_name =</span> node4
-<span class="variable">wsrep_node_address=</span><span class="number">10.128</span>.<span class="number">20.16</span>
-<span class="comment">#wsrep_provider_options="socket.ssl_key=/etc/pki/galera/galera.key; socket.ssl_cert=/etc/pki/galera/galera.crt;"</span>
-</code></pre><p>提示：如果不用ssl的方式认证的话，请把wsrep_provider_options 注释掉。<br>将此文件复制到node5、node6，注意要把 wsrep_node_name和 wsrep_node_address改成相应节点的 hostname和ip。</p>
-<h4 id="4-启动_MariaDB_Galera_Cluster_服务">4.启动 MariaDB Galera Cluster 服务</h4><pre><code>[root<span class="annotation">@node</span>4 ~]# <span class="regexp">/usr/</span>libexec/mysqld --wsrep-<span class="keyword">new</span>-cluster --user=root &amp;
-</code></pre><p>观察日志：</p>
-<pre><code>[root<span class="annotation">@node</span>4 ~]# tail -f <span class="regexp">/var/</span>log<span class="regexp">/mariadb/</span>mariadb.log
-
-<span class="number">150701</span> <span class="number">19</span>:<span class="number">54</span>:<span class="number">17</span> [Note] <span class="string">WSREP:</span> wsrep_load(): loading provider library <span class="string">'none'</span>
-<span class="number">150701</span> <span class="number">19</span>:<span class="number">54</span>:<span class="number">17</span> [Note] <span class="regexp">/usr/</span>libexec/<span class="string">mysqld:</span> ready <span class="keyword">for</span> connections.
-<span class="string">Version:</span> <span class="string">'5.5.40-MariaDB-wsrep'</span>  <span class="string">socket:</span> <span class="string">'/var/lib/mysql/mysql.sock'</span>  <span class="string">port:</span> <span class="number">3306</span>  MariaDB Server, wsrep_25.11.r4026
-</code></pre><p>出现 ready for connections ,证明我们启动成功，继续启动其他节点：</p>
-<pre><code>[root<span class="property">@node5</span> ~]<span class="comment"># systemctl start mariadb</span>
-[root<span class="property">@node6</span> ~]<span class="comment"># systemctl start mariadb</span>
-</code></pre><p>可以查看/var/log/mariadb/mariadb.log，在日志可以看到节点均加入了集群中。</p>
-<p>警告⚠：—wsrep-new-cluster 这个参数只能在初始化集群使用，且只能在一个节点使用。</p>
-<h4 id="5-查看集群状态">5.查看集群状态</h4><p><img src="http://7xk2is.com1.z0.glb.clouddn.com/galera-status.png" alt="status"></p>
-<p>我们可以关注几个关键的参数：</p>
-<pre><code><span class="setting">wsrep_connected = <span class="value"><span class="keyword">on</span> 链接已开启</span></span>
-
-<span class="setting">wsrep_local_index = <span class="value"><span class="number">1</span>在集群中的索引值</span></span>
-
-<span class="setting">wsrep_cluster_size =<span class="value"><span class="number">3</span>集群中节点的数量</span></span>
-
-<span class="setting">wsrep_incoming_addresses =     <span class="value"><span class="number">10.128</span>.<span class="number">20.17</span>:<span class="number">3306</span>,<span class="number">10.128</span>.<span class="number">20.16</span>:<span class="number">3306</span>,<span class="number">10.128</span>.<span class="number">20.18</span>:<span class="number">3306</span> 集群中节点的访问地址</span></span>
-</code></pre><h4 id="6-验证数据同步">6.验证数据同步</h4><p>我们在node4上新建数据库 galera_test ,然后在node5 和node6 上查询，如果可以查询到 galera_test 这个库，说明数据同步成功，集群运行正常。</p>
-<pre><code>[root<span class="comment">@node4 ~]# mysql -uroot -proot -e "create database galera_test"</span>
-[root<span class="comment">@node5 ~]# mysql -uroot -proot -e "show databases"</span>
-+--------------------+
-|<span class="string"> Database </span>|
-+--------------------+
-|<span class="string"> information_schema </span>|
-|<span class="string"> galera_test </span>|
-|<span class="string"> mysql </span>|
-|<span class="string"> performance_schema </span>|
-+--------------------+
-
-
-[root<span class="comment">@node6 ~]# mysql -uroot -proot -e "show databases"</span>
-+--------------------+
-|<span class="string"> Database </span>|
-+--------------------+
-|<span class="string"> information_schema </span>|
-|<span class="string"> galera_test </span>|
-|<span class="string"> mysql </span>|
-|<span class="string"> performance_schema </span>|
-+--------------------+
-</code></pre><p>至此，我们的 MariaDB Galera Cluster 已经成功部署。</p>
-
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/DB/">DB</a></li></ul>
+<div class="share">
+	<!-- JiaThis Button BEGIN -->
+	<div class="jiathis_style">
+		<span class="jiathis_txt">分享到：</span>
+		<a class="jiathis_button_tsina"></a>
+		<a class="jiathis_button_cqq"></a>
+		<a class="jiathis_button_douban"></a>
+		<a class="jiathis_button_weixin"></a>
+		<a class="jiathis_button_tumblr"></a>
+		<a href="http://www.jiathis.com/share" class="jiathis jiathis_txt jtico jtico_jiathis" target="_blank"></a>
 	</div>
-
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-    
-  </div>
-  
-</article>
+	<script type="text/javascript" src="http://v3.jiathis.com/code/jia.js?uid=1405949716054953" charset="utf-8"></script>
+	<!-- JiaThis Button END -->
+</div>
 
 
 
+<div class="duoshuo">
+	<!-- 多说评论框 start -->
+	<div class="ds-thread" data-thread-key="业务安全漏洞挖掘归纳总结" data-title="业务安全漏洞挖掘归纳总结" data-url="http://yunops.top/2015/07/07/业务安全漏洞挖掘归纳总结/"></div>
+	<!-- 多说评论框 end -->
+	<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+	<script type="text/javascript">
+	var duoshuoQuery = {short_name:"yunops"};
+	(function() {
+		var ds = document.createElement('script');
+		ds.type = 'text/javascript';ds.async = true;
+		ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+		ds.charset = 'UTF-8';
+		(document.getElementsByTagName('head')[0] 
+		 || document.getElementsByTagName('body')[0]).appendChild(ds);
+	})();
+	</script>
+	<!-- 多说公共JS代码 end -->
+</div>
 
 
 
 
-  
-  
 </div>
       <footer id="footer">
   <div class="outer">
@@ -639,8 +490,8 @@ Thanks <span class="keyword">for</span> <span class="keyword">using</span> Maria
 		fancybox: true,
 		mathjax: true,
 		animate: true,
-		isHome: true,
-		isPost: false,
+		isHome: false,
+		isPost: true,
 		isArchive: false,
 		isTag: false,
 		isCategory: false,
