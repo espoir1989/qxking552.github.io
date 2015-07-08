@@ -175,10 +175,10 @@
 </nav>
       <div class="body-wrap">
   
-    <article id="post-业务安全漏洞挖掘归纳总结" class="article article-type-post" itemscope itemprop="blogPost">
+    <article id="post-(转载)业务安全漏洞挖掘归纳总结" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
-      <a href="/2015/07/07/业务安全漏洞挖掘归纳总结/" class="article-date">
+      <a href="/2015/07/07/(转载)业务安全漏洞挖掘归纳总结/" class="article-date">
   	<time datetime="2015-07-07T11:31:07.000Z" itemprop="datePublished">2015-07-07</time>
 </a>
     </div>
@@ -192,7 +192,7 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2015/07/07/业务安全漏洞挖掘归纳总结/">业务安全漏洞挖掘归纳总结</a>
+      <a class="article-title" href="/2015/07/07/(转载)业务安全漏洞挖掘归纳总结/">(转载)业务安全漏洞挖掘归纳总结</a>
     </h1>
   
 
@@ -203,181 +203,11 @@
       
         <h3 id="0x00_索引说明">0x00 索引说明</h3><hr>
 <p>6.30在OWASP的分享，关于业务安全的漏洞检测模型。进一步的延伸科普。<br><img src="http://static.wooyun.org//drops/20150703/2015070302312847097.png" alt="001"><br><img src="http://static.wooyun.org//drops/20150703/2015070302312815571.png" alt="002"></p>
-<h3 id="0x01_身份认证安全">0x01 身份认证安全</h3><h5 id="1-暴力破解">1.暴力破解</h5><p>在没有验证码限制或者一次验证码可以多次使用的地方，使用已知用户对密码进行暴力破解或者用一个通用密码对用户进行暴力破解。 简单的验证码爆破。URL: <a href="http://zone.wooyun.org/content/20839" target="_blank" rel="external">http://zone.wooyun.org/content/20839</a></p>
+<h3 id="0x01_身份认证安全">0x01 身份认证安全</h3><h5 id="1-暴力破解">1.暴力破解</h5><p>在没有验证码限制或者一次验证码可以多次使用的地方，使用已知用户对密码进行暴力破解或者用一个通用密码对用户进行暴力破解。 简单的验证码爆破。URL: <a href="http://zone.wooyun.org/content/20839">http://zone.wooyun.org/content/20839</a></p>
 <p>一些工具及脚本</p>
 <p>Burpsuite</p>
-<p>htpwdScan 撞库爆破必备 URL: <a href="https://github.com/lijiejie/htpwdScan" target="_blank" rel="external">https://github.com/lijiejie/htpwdScan</a></p>
-<p>hydra 源码安装xhydra支持更多的协议去爆破 (可破WEB，其他协议不属于业务安全的范畴)</p>
-<h5 id="2-session_&amp;_cookie类">2.session &amp; cookie类</h5><p>会话固定攻击：利用服务器的session不变机制，借他人之手获得认证和授权，冒充他人。案例：</p>
-<p>WooYun: <a href="http://www.wooyun.org/bugs/wooyun-2013-025427" target="_blank" rel="external">新浪广东美食后台验证逻辑漏洞，直接登录后台，566764名用户资料暴露！</a></p>
-<p>Cookie仿冒：修改cookie中的某个参数可以登录其他用户。 案例：益云广告平台任意帐号登录</p>
-<p>WooYun: <a href="http://www.wooyun.org/bugs/wooyun-2014-051424" target="_blank" rel="external">益云广告平台任意帐号登录</a></p>
-<h5 id="3-弱加密">3.弱加密</h5><p>未使用https，是功能测试点，不好利用。</p>
-<p>前端加密，用密文去后台校验，并利用smart decode可解</p>
-<h3 id="0x02_业务一致性安全">0x02 业务一致性安全</h3><hr>
-<h5 id="1-手机号篡改">1.手机号篡改</h5><ul>
-<li>a) 抓包修改手机号码参数为其他号码尝试，例如在办理查询页面，输入自己的号码然后抓包，修改手机号码参数为其他人号码，查看是否能查询其他人的业务。</li>
-</ul>
-<h5 id="2-邮箱或者用户篡改">2.邮箱或者用户篡改</h5><ul>
-<li><p>a) 抓包修改用户或者邮箱参数为其他用户或者邮箱</p>
-</li>
-<li><p>b) 案例：WooYun: <a href="http://www.wooyun.org/bugs/wooyun-2014-074441" target="_blank" rel="external">绿盟RSAS安全系统全版本通杀权限管理员绕过漏洞，包括最新 RSAS V5.0.13.2</a></p>
-</li>
-</ul>
-<h5 id="3-订单id篡改">3.订单id篡改</h5><ul>
-<li><p>a) 查看自己的订单id，然后修改id（加减一）查看是否能查看其它订单信息。</p>
-</li>
-<li><p>b) 案例： WooYun:<a href="http://www.wooyun.org/bugs/wooyun-2013-044137" target="_blank" rel="external">广之旅旅行社任意访问用户订单</a></p>
-</li>
-</ul>
-<h5 id="4-商品编号篡改">4.商品编号篡改</h5><ul>
-<li><p>a) 例如积分兑换处，100个积分只能换商品编号为001,1000个积分只能换商品编号005，在100积分换商品的时候抓包把换商品的编号修改为005，用低积分换区高积分商品。</p>
-</li>
-<li><p>b) 案例：联想某积分商城支付漏洞再绕过 WooYun: <a href="http://www.wooyun.org/bugs/wooyun-2013-041617" target="_blank" rel="external">联想某积分商城支付漏洞再绕过</a></p>
-</li>
-</ul>
-<h5 id="5-用户id篡改">5.用户id篡改</h5><ul>
-<li><p>a) 抓包查看自己的用户id，然后修改id（加减1）查看是否能查看其它用户id信息。</p>
-</li>
-<li><p>b) 案例： WooYun: <a href="http://www.wooyun.org/bugs/wooyun-2015-0111617" target="_blank" rel="external">拉勾网百万简历泄漏风险(包括手机、邮件、应聘职位等信息、还可冒充企业身份筛选简历、发面试通知等)</a></p>
-</li>
-</ul>
-<h3 id="0x03_业务数据篡改">0x03 业务数据篡改</h3><hr>
-<h5 id="1-金额数据篡改">1.金额数据篡改</h5><ul>
-<li><p>a) 抓包修改金额等字段，例如在支付页面抓取请求中商品的金额字段，修改成任意数额的金额并提交，查看能否以修改后的金额数据完成业务流程。</p>
-</li>
-<li><p>b) 案例： WooYun:<a href="http://www.wooyun.org/bugs/wooyun-2015-0117083" target="_blank" rel="external">12308订单支付时的总价未验证漏洞(支付逻辑漏洞)</a></p>
-</li>
-</ul>
-<h5 id="2-商品数量篡改">2.商品数量篡改</h5><ul>
-<li><p>a) 抓包修改商品数量等字段，将请求中的商品数量修改成任意数额，如负数并提交，查看能否以修改后的数量完成业务流程。</p>
-</li>
-<li><p>b) 案例： WooYun: <a href="http://www.wooyun.org/bugs/wooyun-2015-0109037" target="_blank" rel="external">蔚蓝团支付逻辑漏洞(可负数支付)</a></p>
-</li>
-</ul>
-<h5 id="3-最大数限制突破">3.最大数限制突破</h5><ul>
-<li>a) 很多商品限制用户购买数量时，服务器仅在页面通过js脚本限制，未在服务器端校验用户提交的数量，通过抓包修改商品最大数限制，将请求中的商品数量改为大于最大数限制的值，查看能否以修改后的数量完成业务流程。</li>
-</ul>
-<h5 id="4-本地js参数修改">4.本地js参数修改</h5><ul>
-<li>a) 部分应用程序通过Javascript处理用户提交的请求，通过修改Javascript脚本，测试修改后的数据是否影响到用户。</li>
-</ul>
-<h3 id="0x04_用户输入合规性">0x04 用户输入合规性</h3><hr>
-<p>1 注入测试 请参考<a href="http://wiki.wooyun.org/web:sql" target="_blank" rel="external">http://wiki.wooyun.org/web:sql</a></p>
-<p>2 XSS测试 请参考<a href="http://wiki.wooyun.org/web:xss" target="_blank" rel="external">http://wiki.wooyun.org/web:xss</a></p>
-<p>3 Fuzz</p>
-<ul>
-<li><p>a ) 功能测试用的多一些，有可能一个超长特殊字符串导致系统拒绝服务或者功能缺失。（当然fuzz不单单这点用途。）</p>
-</li>
-<li><p>b ) 不太符合的案例，但思路可借鉴： WooYun: <a href="http://www.wooyun.org/bugs/wooyun-2014-048293" target="_blank" rel="external">建站之星模糊测试实战之任意文件上传漏洞</a></p>
-</li>
-<li><p>c ) 可能会用的工具 —— spike</p>
-</li>
-</ul>
-<p>4 其他用用户输入交互的应用漏洞</p>
-<h3 id="0x05_密码找回漏洞">0x05 密码找回漏洞</h3><hr>
-<p>1 大力推荐BMa的《密码找回逻辑漏洞总结》</p>
-<p><a href="http://drops.wooyun.org/web/5048" target="_blank" rel="external">http://drops.wooyun.org/web/5048</a></p>
-<p>a) 密码找回逻辑测试一般流程</p>
-<ul>
-<li><p>1.首先尝试正常密码找回流程，选择不同找回方式，记录所有数据包</p>
-</li>
-<li><p>2.分析数据包，找到敏感部分</p>
-</li>
-<li><p>3.分析后台找回机制所采用的验证手段</p>
-</li>
-<li><p>4.修改数据包验证推测</p>
-</li>
-</ul>
-<p>b) 脑图 （详情请参考BMa的《密码找回逻辑漏洞总结》）<br><img src="http://static.wooyun.org//drops/20150703/2015070302312839779.png" alt="http://static.wooyun.org//drops/20150703/2015070302312839779.png"></p>
-<h3 id="0x06_验证码突破">0x06 验证码突破</h3><hr>
-<p>1 验证码暴力破解测试</p>
-<ul>
-<li><p>a) 使用burp对特定的验证码进行暴力破解</p>
-</li>
-<li><p>b) 案例： WooYun: <a href="http://www.wooyun.org/bugs/wooyun-2015-093932" target="_blank" rel="external">盟友88电商平台任意用户注册与任意用户密码重置漏洞打包</a></p>
-</li>
-</ul>
-<p>2 验证码时间、次数测试</p>
-<ul>
-<li><p>a) 抓取携带验证码的数据包不断重复提交，例如：在投诉建议处输入要投诉的内容信息，及验证码参数，此时抓包重复提交数据包，查看历史投诉中是否存在重复提交的参数信息。</p>
-</li>
-<li><p>b) 案例：</p>
-</li>
-</ul>
-<p>3 验证码客户端回显测试</p>
-<ul>
-<li>a) 当客户端有需要和服务器进行交互，发送验证码时，即可使用firefox按F12调出firebug就可看到客户端与服务器进行交互的详细信息</li>
-</ul>
-<p>4 验证码绕过测试</p>
-<ul>
-<li><p>a) 当第一步向第二步跳转时，抓取数据包，对验证码进行篡改清空测试，验证该步骤验证码是否可以绕过。</p>
-</li>
-<li><p>b) 案例： WooYun: <a href="http://www.wooyun.org/bugs/wooyun-2015-098765" target="_blank" rel="external">中国电信某IDC机房信息安全管理系统设计缺陷致使系统沦陷</a></p>
-</li>
-</ul>
-<p>5 验证码js绕过</p>
-<ul>
-<li>a) 短信验证码验证程序逻辑存在缺陷，业务流程的第一步、第二部、第三步都是放在同一个页面里，验证第一步验证码是通过js来判断的，可以修改验证码在没有获取验证码的情况下可以填写实名信息，并且提交成功。</li>
-</ul>
-<h3 id="0x07_业务授权安全">0x07 业务授权安全</h3><hr>
-<p>1 未授权访问</p>
-<ul>
-<li>a) 非授权访问是指用户在没有通过认证授权的情况下能够直接访问需要通过认证才能访问到的页面或文本信息。可以尝试在登录某网站前台或后台之后，将相关的页面链接复制于其他浏览器或其他电脑上进行访问，看是否能访问成功。</li>
-</ul>
-<p>2 越权访问</p>
-<p>越权漏洞的成因主要是因为开发人员在对数据进行增、删、改、查询时对客户端请求的数据过分相信而遗漏了权限的判定</p>
-<ul>
-<li><p>a) 垂直越权（垂直越权是指使用权限低的用户可以访问权限较高的用户）</p>
-</li>
-<li><p>b) 水平越权（水平越权是指相同权限的不同用户可以互相访问）（wooyun-2010-0100991 PHPEMS多处存在水平权限问题）</p>
-</li>
-<li><p>c) 《我的越权之道》URL：<a href="http://drops.wooyun.org/tips/727" target="_blank" rel="external">http://drops.wooyun.org/tips/727</a></p>
-</li>
-</ul>
-<h3 id="0x08_业务流程乱序">0x08 业务流程乱序</h3><hr>
-<p>1 顺序执行缺陷</p>
-<ul>
-<li><p>a) 部分网站逻辑可能是先A过程后B过程然后C过程最后D过程</p>
-</li>
-<li><p>b) 用户控制着他们给应用程序发送的每一个请求，因此能够按照任何顺序进行访问。于是，用户就从B直接进入了D过程，就绕过了C。如果C是支付过程，那么用户就绕过了支付过程而买到了一件商品。如果C是验证过程，就会绕过验证直接进入网站程序了。</p>
-</li>
-<li><p>c) 案例：</p>
-<p>  WooYun: <a href="http://www.wooyun.org/bugs/wooyun-2014-047677" target="_blank" rel="external">万达某分站逻辑错误可绕过支付直接获得取票密码</a></p>
-<p>  <a href="http://wooyun.org/bugs/wooyun-2010-0108184" target="_blank" rel="external">http://wooyun.org/bugs/wooyun-2010-0108184</a></p>
-</li>
-</ul>
-<h3 id="0x09_业务接口调用安全">0x09 业务接口调用安全</h3><hr>
-<p>1 重放攻击</p>
-<p>在短信、邮件调用业务或生成业务数据环节中（类：短信验证码，邮件验证码，订单生成，评论提交等），对其业务环节进行调用（重放）测试。如果业务经过调用（重放）后被多次生成有效的业务或数据结果</p>
-<ul>
-<li><p>a) 恶意注册</p>
-</li>
-<li><p>b) 短信炸弹</p>
-</li>
-</ul>
-<p>在测试的过程中，我们发现众多的金融交易平台仅在前端通过JS校验时间来控制短信发送按钮，但后台并未对发送做任何限制，导致可通过重放包的方式大量发送恶意短信</p>
-<p>案例： WooYun: <a href="http://www.wooyun.org/bugs/wooyun-2015-094545" target="_blank" rel="external">一亩田交易网逻辑漏洞（木桶原理）</a></p>
-<p>2 内容编辑</p>
-<p>类似案例如下：</p>
-<p>点击“获取短信验证码”，并抓取数据包内容，如下图。通过分析数据包，可以发现参数sendData/insrotxt的内容有客户端控制，可以修改为攻击者想要发送的内容<br><img src="http://static.wooyun.org//drops/20150703/2015070302312854742.png" alt="http://static.wooyun.org//drops/20150703/2015070302312854742.png"><br>将内容修改“恭喜你获得由xx银行所提供的iphone6一部，请登录<a href="http://www.xxx.com领取，验证码为236694”并发送该数据包，手机可收到修改后的短信内容，如下图：" target="_blank" rel="external">http://www.xxx.com领取，验证码为236694”并发送该数据包，手机可收到修改后的短信内容，如下图：</a><br><img src="http://static.wooyun.org//drops/20150703/2015070302312971068.png" alt="http://static.wooyun.org//drops/20150703/2015070302312971068.png"></p>
-<h3 id="0x10_时效绕过测试">0x10 时效绕过测试</h3><hr>
-<p>大多有利用的案例发生在验证码以及业务数据的时效范围上，在之前的总结也有人将12306的作为典型，故，单独分类。</p>
-<p>1 时间刷新缺陷</p>
-<p>12306网站的买票业务是每隔5s，票会刷新一次。但是这个时间确实在本地设置的间隔。于是，在控制台就可以将这个时间的关联变量重新设置成1s或者更小，这样刷新的时间就会大幅度缩短（主要更改autoSearchTime本地参数）。 案例：</p>
-<p>WooYun: <a href="http://www.wooyun.org/bugs/wooyun-2014-048391" target="_blank" rel="external">12306自动刷票时间可更改漏洞</a></p>
-<p>2 时间范围测试</p>
-<p>针对某些带有时间限制的业务，修改其时间限制范围，例如在某项时间限制范围内查询的业务，修改含有时间明文字段的请求并提交，查看能否绕过时间限制完成业务流程。例如通过更改查询手机网厅的受理记录的month范围，可以突破默认只能查询六个月的记录。</p>
-<h3 id="0x11_参考">0x11 参考</h3><hr>
-<p>应用程序逻辑错误总结 <a href="http://drops.wooyun.org/papers/1418" target="_blank" rel="external">http://drops.wooyun.org/papers/1418</a></p>
-<p>密码找回功能可能存在的问题 <a href="http://drops.wooyun.org/papers/287" target="_blank" rel="external">http://drops.wooyun.org/papers/287</a></p>
-<p>密码找回功能可能存在的问题（补充） <a href="http://drops.wooyun.org/web/3295" target="_blank" rel="external">http://drops.wooyun.org/web/3295</a></p>
-<p>密码找回逻辑漏洞总结 <a href="http://drops.wooyun.org/web/5048" target="_blank" rel="external">http://drops.wooyun.org/web/5048</a></p>
-<p>支付漏洞的三种常见类型——加固方案 <a href="http://zone.wooyun.org/content/878" target="_blank" rel="external">http://zone.wooyun.org/content/878</a></p>
-<p>在线支付逻辑漏洞总结 <a href="http://drops.wooyun.org/papers/345" target="_blank" rel="external">http://drops.wooyun.org/papers/345</a></p>
-<p>金融行业平台常见安全漏洞与防御 <a href="http://www.freebuf.com/news/special/61082.html" target="_blank" rel="external">http://www.freebuf.com/news/special/61082.html</a></p>
-<p>我的越权之道 <a href="http://drops.wooyun.org/tips/727" target="_blank" rel="external">http://drops.wooyun.org/tips/727</a></p>
-<p>安全科普：看视频理解Web应用安全漏洞TOP10（IBM内部视频） <a href="http://www.freebuf.com/vuls/63426.html" target="_blank" rel="external">http://www.freebuf.com/vuls/63426.html</a><br>w</p>
-
+<p>htpwdScan 撞库爆破必备 URL: <a href="https://github.com/lijiejie/htpwdScan">https://github.com/lijiejie/htpwdScan</a></p>
+<p>hydra 源码安装xhydra支持更多的协议去爆破 (可破WEB，其他协议不属于业务安全的范畴)<br>
       
     </div>
     
@@ -390,6 +220,10 @@
 
       
 
+      
+        <p class="article-more-link">
+          <a  href="/2015/07/07/(转载)业务安全漏洞挖掘归纳总结/#more">more >></a>
+        </p>
       
       <div class="clearfix"></div>
     </div>
@@ -405,10 +239,10 @@
 
 
   
-    <article id="post-MariaDB Galera Cluster 部署" class="article article-type-post" itemscope itemprop="blogPost">
+    <article id="post-(转载)MariaDB Galera Cluster 部署" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
-      <a href="/2015/07/07/MariaDB Galera Cluster 部署/" class="article-date">
+      <a href="/2015/07/07/(转载)MariaDB Galera Cluster 部署/" class="article-date">
   	<time datetime="2015-07-06T23:07:07.000Z" itemprop="datePublished">2015-07-07</time>
 </a>
     </div>
@@ -422,7 +256,7 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2015/07/07/MariaDB Galera Cluster 部署/">MariaDB Galera Cluster 部署（如何快速部署 MariaDB 集群）</a>
+      <a class="article-title" href="/2015/07/07/(转载)MariaDB Galera Cluster 部署/">(转载)MariaDB Galera Cluster 部署（如何快速部署 MariaDB 集群）</a>
     </h1>
   
 
@@ -449,145 +283,6 @@
 <li>更小的客户端延迟</li>
 <li>节点间数据是同步的,而Master/Slave模式是异步的,不同slave上的binlog可能是不同的</li>
 </ul>
-<h4 id="技术:">技术:</h4><p>Galera集群的复制功能基于Galeralibrary实现,为了让MySQL与Galera library通讯，特别针对MySQL开发了wsrep API。</p>
-<p>Galera插件保证集群同步数据，保持数据的一致性，靠的就是可认证的复制，工作原理如下图：</p>
-<p><img src="http://7xk2is.com1.z0.glb.clouddn.com/mariadb-galera-cluster.png" alt="images"></p>
-<p>当客户端发出一个commit的指令，在事务被提交之前，所有对数据库的更改都会被write-set收集起来,并且将 write-set 纪录的内容发送给其他节点。</p>
-<p>write-set 将在每个节点进行认证测试，测试结果决定着节点是否应用write-set更改数据。</p>
-<p>如果认证测试失败，节点将丢弃 write-set ；如果认证测试成功，则事务提交。</p>
-<h4 id="1-安装环境准备">1.安装环境准备</h4><p><br><br>安装MariaDB集群至少需要3台服务器（如果只有两台的话需要特殊配置，请参照官方文档）</p>
-<p>在这里，我列出试验机器的配置：</p>
-<p>操作系统版本：centos7</p>
-<p>node4:10.128.20.16 node5:10.128.20.17 node6:10.128.20.18</p>
-<p>以第一行为例，node4为 hostname ，10.128.20.16为 ip ，在三台机器修改 /etc/hosts文件，我的文件如下：</p>
-<pre><code>10<span class="class">.128</span><span class="class">.20</span><span class="class">.16</span> <span class="tag">node4</span>
-10<span class="class">.128</span><span class="class">.20</span><span class="class">.17</span> <span class="tag">node5</span>
-10<span class="class">.128</span><span class="class">.20</span><span class="class">.18</span> <span class="tag">node6</span>
-</code></pre><p>为了保证节点间相互通信，需要禁用防火墙设置（如果需要防火墙，则参照官方网站增加防火墙信息设置）</p>
-<p>在三个节点分别执行命令：</p>
-<pre><code>systemctl <span class="keyword">stop</span> firewalld
-</code></pre><p>然后将/etc/sysconfig/selinux 的 selinux 设置成 disabled ,这样初始化环境就完成了。</p>
-<h4 id="2-安装_MariaDB_Galera_Cluster">2.安装 MariaDB Galera Cluster</h4><pre><code>[root<span class="property">@node4</span> ~]<span class="comment"># yum install -y mariadb mariadb-galera-server mariadb-galera-common galera rsync</span>
-
-[root<span class="property">@node5</span> ~]<span class="comment"># yum install -y mariadb mariadb-galera-server mariadb-galera-common galera rsync</span>
-
-[root<span class="property">@node6</span> ~]<span class="comment"># yum install -y mariadb mariadb-galera-server mariadb-galera-common galera rsync</span>
-</code></pre><h4 id="3-配置_MariaDB_Galera_Cluster">3.配置 MariaDB Galera Cluster</h4><p>初始化数据库服务，只在一个节点进行</p>
-<pre><code>[root@node4 mariadb]<span class="preprocessor"># systemctl start mariadb</span>
-[root@node4 mariadb]<span class="preprocessor"># mysql_secure_installation</span>
-
-NOTE: RUNNING ALL PARTS <span class="keyword">OF</span> THIS SCRIPT <span class="keyword">IS</span> RECOMMENDED <span class="keyword">FOR</span> ALL MariaDB
-SERVERS <span class="keyword">IN</span> PRODUCTION USE! PLEASE READ <span class="keyword">EACH</span> <span class="keyword">STEP</span> CAREFULLY!
-
-<span class="keyword">In</span> <span class="keyword">order</span> <span class="keyword">to</span> log <span class="keyword">into</span> MariaDB <span class="keyword">to</span> secure it, we<span class="comment">'ll need the current</span>
-password <span class="keyword">for</span> the root user. <span class="keyword">If</span> you<span class="comment">'ve just installed MariaDB, and</span>
-you haven<span class="comment">'t set the root password yet, the password will be blank,</span>
-so you should just press enter here.
-
-Enter current password <span class="keyword">for</span> root (enter <span class="keyword">for</span> none):
-OK, successfully used password, moving <span class="keyword">on</span>...
-
-Setting the root password ensures that nobody can log <span class="keyword">into</span> the MariaDB
-root user without the proper authorisation.
-
-<span class="keyword">Set</span> root password? [Y/n]
-<span class="keyword">New</span> password:
-Re-enter <span class="keyword">new</span> password:
-Password updated successfully!
-Reloading privilege tables..
-... Success!
-
-<span class="keyword">By</span> <span class="keyword">default</span>, a MariaDB installation has an anonymous user, allowing     anyone
-<span class="keyword">to</span> log <span class="keyword">into</span> MariaDB without having <span class="keyword">to</span> have a user account created <span class="keyword">for</span>
-them. This <span class="keyword">is</span> intended only <span class="keyword">for</span> testing, <span class="keyword">and</span> <span class="keyword">to</span> make the installation
-go a bit smoother. You should remove them before moving <span class="keyword">into</span> a
-production environment.
-
-Remove anonymous users? [Y/n] n
-... skipping.
-
-Normally, root should only be allowed <span class="keyword">to</span> connect <span class="keyword">from</span> <span class="comment">'localhost'. This</span>
-ensures that someone cannot guess at the root password <span class="keyword">from</span> the network.
-
-Disallow root login remotely? [Y/n] y
-... Success!
-
-<span class="keyword">By</span> <span class="keyword">default</span>, MariaDB comes <span class="keyword">with</span> a database named <span class="comment">'test' that anyone can</span>
-access. This <span class="keyword">is</span> also intended only <span class="keyword">for</span> testing, <span class="keyword">and</span> should be removed
-before moving <span class="keyword">into</span> a production environment.
-
-Remove test database <span class="keyword">and</span> access <span class="keyword">to</span> it? [Y/n] n
-... skipping.
-
-Reloading the privilege tables will ensure that all changes made so far
-will <span class="keyword">take</span> effect immediately.
-
-Reload privilege tables now? [Y/n] y
-... Success!
-
-Cleaning up...
-
-All done! <span class="keyword">If</span> you<span class="comment">'ve completed all of the above steps, your MariaDB</span>
-installation should now be secure.
-
-Thanks <span class="keyword">for</span> <span class="keyword">using</span> MariaDB!
-</code></pre><p>关闭数据库，修改 /etc/my.cnf.d/galera.cnf</p>
-<pre><code>[root<span class="property">@node4</span> mariadb]<span class="comment"># systemctl stop mariadb</span>
-[root<span class="property">@node4</span> ~]<span class="comment"># vim /etc/my.cnf.d/galera.cnf</span>
-</code></pre><p>修改以下内容：</p>
-<pre><code>[mysqld]
-......
-<span class="variable">wsrep_provider =</span> /usr/lib64/galera/libgalera_smm.so
-<span class="variable">wsrep_cluster_address =</span> <span class="string">"gcomm://node4,node5,node6"</span>
-<span class="variable">wsrep_node_name =</span> node4
-<span class="variable">wsrep_node_address=</span><span class="number">10.128</span>.<span class="number">20.16</span>
-<span class="comment">#wsrep_provider_options="socket.ssl_key=/etc/pki/galera/galera.key; socket.ssl_cert=/etc/pki/galera/galera.crt;"</span>
-</code></pre><p>提示：如果不用ssl的方式认证的话，请把wsrep_provider_options 注释掉。<br>将此文件复制到node5、node6，注意要把 wsrep_node_name和 wsrep_node_address改成相应节点的 hostname和ip。</p>
-<h4 id="4-启动_MariaDB_Galera_Cluster_服务">4.启动 MariaDB Galera Cluster 服务</h4><pre><code>[root<span class="annotation">@node</span>4 ~]# <span class="regexp">/usr/</span>libexec/mysqld --wsrep-<span class="keyword">new</span>-cluster --user=root &amp;
-</code></pre><p>观察日志：</p>
-<pre><code>[root<span class="annotation">@node</span>4 ~]# tail -f <span class="regexp">/var/</span>log<span class="regexp">/mariadb/</span>mariadb.log
-
-<span class="number">150701</span> <span class="number">19</span>:<span class="number">54</span>:<span class="number">17</span> [Note] <span class="string">WSREP:</span> wsrep_load(): loading provider library <span class="string">'none'</span>
-<span class="number">150701</span> <span class="number">19</span>:<span class="number">54</span>:<span class="number">17</span> [Note] <span class="regexp">/usr/</span>libexec/<span class="string">mysqld:</span> ready <span class="keyword">for</span> connections.
-<span class="string">Version:</span> <span class="string">'5.5.40-MariaDB-wsrep'</span>  <span class="string">socket:</span> <span class="string">'/var/lib/mysql/mysql.sock'</span>  <span class="string">port:</span> <span class="number">3306</span>  MariaDB Server, wsrep_25.11.r4026
-</code></pre><p>出现 ready for connections ,证明我们启动成功，继续启动其他节点：</p>
-<pre><code>[root<span class="property">@node5</span> ~]<span class="comment"># systemctl start mariadb</span>
-[root<span class="property">@node6</span> ~]<span class="comment"># systemctl start mariadb</span>
-</code></pre><p>可以查看/var/log/mariadb/mariadb.log，在日志可以看到节点均加入了集群中。</p>
-<p>警告⚠：—wsrep-new-cluster 这个参数只能在初始化集群使用，且只能在一个节点使用。</p>
-<h4 id="5-查看集群状态">5.查看集群状态</h4><p><img src="http://7xk2is.com1.z0.glb.clouddn.com/galera-status.png" alt="status"></p>
-<p>我们可以关注几个关键的参数：</p>
-<pre><code><span class="setting">wsrep_connected = <span class="value"><span class="keyword">on</span> 链接已开启</span></span>
-
-<span class="setting">wsrep_local_index = <span class="value"><span class="number">1</span>在集群中的索引值</span></span>
-
-<span class="setting">wsrep_cluster_size =<span class="value"><span class="number">3</span>集群中节点的数量</span></span>
-
-<span class="setting">wsrep_incoming_addresses =     <span class="value"><span class="number">10.128</span>.<span class="number">20.17</span>:<span class="number">3306</span>,<span class="number">10.128</span>.<span class="number">20.16</span>:<span class="number">3306</span>,<span class="number">10.128</span>.<span class="number">20.18</span>:<span class="number">3306</span> 集群中节点的访问地址</span></span>
-</code></pre><h4 id="6-验证数据同步">6.验证数据同步</h4><p>我们在node4上新建数据库 galera_test ,然后在node5 和node6 上查询，如果可以查询到 galera_test 这个库，说明数据同步成功，集群运行正常。</p>
-<pre><code>[root<span class="comment">@node4 ~]# mysql -uroot -proot -e "create database galera_test"</span>
-[root<span class="comment">@node5 ~]# mysql -uroot -proot -e "show databases"</span>
-+--------------------+
-|<span class="string"> Database </span>|
-+--------------------+
-|<span class="string"> information_schema </span>|
-|<span class="string"> galera_test </span>|
-|<span class="string"> mysql </span>|
-|<span class="string"> performance_schema </span>|
-+--------------------+
-
-
-[root<span class="comment">@node6 ~]# mysql -uroot -proot -e "show databases"</span>
-+--------------------+
-|<span class="string"> Database </span>|
-+--------------------+
-|<span class="string"> information_schema </span>|
-|<span class="string"> galera_test </span>|
-|<span class="string"> mysql </span>|
-|<span class="string"> performance_schema </span>|
-+--------------------+
-</code></pre><p>至此，我们的 MariaDB Galera Cluster 已经成功部署。</p>
-
       
     </div>
     
@@ -600,6 +295,10 @@ Thanks <span class="keyword">for</span> <span class="keyword">using</span> Maria
 
       
 
+      
+        <p class="article-more-link">
+          <a  href="/2015/07/07/(转载)MariaDB Galera Cluster 部署/#more">more >></a>
+        </p>
       
       <div class="clearfix"></div>
     </div>
@@ -624,7 +323,7 @@ Thanks <span class="keyword">for</span> <span class="keyword">using</span> Maria
     		&copy; 2015 Amour
     	</div>
       	<div class="footer-right">
-      		<a href="http://hexo.io/" target="_blank">Hexo</a>  Theme Yilia by Litten
+      		<a href="http://hexo.io/" target="_blank">Hexo</a>  Theme <a href="https://github.com/litten/hexo-theme-yilia" target="_blank">Yilia</a> by Litten
       	</div>
     </div>
   </div>
