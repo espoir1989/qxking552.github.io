@@ -109,7 +109,7 @@
 				
 				<section class="switch-part switch-part2">
 					<div class="widget tagcloud" id="js-tagcloud">
-						<a href="/tags/DB/" style="font-size: 10px;">DB</a> <a href="/tags/safe/" style="font-size: 10px;">safe</a>
+						<a href="/tags/DB/" style="font-size: 10px;">DB</a> <a href="/tags/OPS/" style="font-size: 10px;">OPS</a> <a href="/tags/safe/" style="font-size: 10px;">safe</a>
 					</div>
 				</section>
 				
@@ -174,6 +174,72 @@
 	</div>
 </nav>
       <div class="body-wrap">
+  
+    <article id="post-Apache下mod_rpaf模块安装" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2015/07/09/Apache下mod_rpaf模块安装/" class="article-date">
+  	<time datetime="2015-07-09T14:34:24.000Z" itemprop="datePublished">2015-07-09</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2015/07/09/Apache下mod_rpaf模块安装/">Apache下mod_rpaf模块安装</a>
+    </h1>
+  
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h5 id="mod_rpaf是apache的一个模块，目的是为了获取访客的真实IP，下面是安装方法">mod_rpaf是apache的一个模块，目的是为了获取访客的真实IP，下面是安装方法</h5><p><br></p>
+<h4 id="安装apache开发组件">安装apache开发组件</h4><pre><code>yum <span class="keyword">install</span> httpd-devel
+</code></pre><h4 id="下载插件并编译安装">下载插件并编译安装</h4><pre><code>wget ftp:<span class="comment">//ftp.tr.debian.org/gentoo/distfiles/mod_rpaf-0.6.tar.gz</span>
+tar xvfz mod_rpaf-<span class="number">0.6</span><span class="class">.tar</span><span class="class">.gz</span>
+cd mod_rpaf-<span class="number">0.6</span>
+apxs -<span class="tag">i</span> -c -n mod_rpaf-<span class="number">2.0</span><span class="class">.so</span> mod_rpaf-<span class="number">2.0</span><span class="class">.c</span>
+chmod <span class="number">755</span> /usr/lib64/httpd/modules/mod_rpaf-<span class="number">2.0</span>.so
+</code></pre><h4 id="配置文件加载模块">配置文件加载模块</h4><pre><code><span class="keyword"><span class="common">LoadModule</span></span> rpaf_module modules/mod_rpaf-2.0.so
+</code></pre><h4 id="配置组件">配置组件</h4><pre><code><span class="tag">RPAFenable</span> <span class="tag">On</span>
+<span class="tag">RPAFsethostname</span> <span class="tag">On</span>
+<span class="tag">RPAFproxy_ips</span> 10<span class="class">.1</span><span class="class">.1</span><span class="class">.2</span> 127<span class="class">.0</span><span class="class">.0</span><span class="class">.1</span>
+<span class="tag">RPAFheader</span> <span class="tag">X-Forwarded-For</span>
+</code></pre>
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/OPS/">OPS</a></li></ul>
+	</div>
+
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+
   
     <article id="post-(转载)业务安全漏洞挖掘归纳总结" class="article article-type-post" itemscope itemprop="blogPost">
   

@@ -3,17 +3,30 @@
 <head>
   <meta charset="utf-8">
   
-  <title>Tag: safe | 云运维</title>
+  <title>Apache下mod_rpaf模块安装 | 云运维</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description">
-<meta property="og:type" content="website">
-<meta property="og:title" content="云运维">
-<meta property="og:url" content="http://yunops.top/tags/safe/index.html">
+  <meta name="description" content="mod_rpaf是apache的一个模块，目的是为了获取访客的真实IP，下面是安装方法
+安装apache开发组件yum install httpd-devel
+下载插件并编译安装wget ftp://ftp.tr.debian.org/gentoo/distfiles/mod_rpaf-0.6.tar.gz
+tar xvfz mod_rpaf-0.6.tar.gz
+cd mod_rpaf-0.6">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Apache下mod_rpaf模块安装">
+<meta property="og:url" content="http://yunops.top/2015/07/09/Apache下mod_rpaf模块安装/index.html">
 <meta property="og:site_name" content="云运维">
-<meta property="og:description">
+<meta property="og:description" content="mod_rpaf是apache的一个模块，目的是为了获取访客的真实IP，下面是安装方法
+安装apache开发组件yum install httpd-devel
+下载插件并编译安装wget ftp://ftp.tr.debian.org/gentoo/distfiles/mod_rpaf-0.6.tar.gz
+tar xvfz mod_rpaf-0.6.tar.gz
+cd mod_rpaf-0.6">
+<meta property="og:updated_time" content="2015-07-09T14:39:43.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="云运维">
-<meta name="twitter:description">
+<meta name="twitter:title" content="Apache下mod_rpaf模块安装">
+<meta name="twitter:description" content="mod_rpaf是apache的一个模块，目的是为了获取访客的真实IP，下面是安装方法
+安装apache开发组件yum install httpd-devel
+下载插件并编译安装wget ftp://ftp.tr.debian.org/gentoo/distfiles/mod_rpaf-0.6.tar.gz
+tar xvfz mod_rpaf-0.6.tar.gz
+cd mod_rpaf-0.6">
   
     <link rel="alternative" href="/atom.xml" title="云运维" type="application/atom+xml">
   
@@ -173,53 +186,114 @@
 		</header>				
 	</div>
 </nav>
-      <div class="body-wrap">
+      <div class="body-wrap"><article id="post-Apache下mod_rpaf模块安装" class="article article-type-post" itemscope itemprop="blogPost">
   
-  
-    
-    
-      
-      
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2015" class="archive-year">2015</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2015/07/07/(转载)业务安全漏洞挖掘归纳总结/" class="archive-article-date">
-  	<time datetime="2015-07-07T11:31:07.000Z" itemprop="datePublished">Jul 7</time>
+    <div class="article-meta">
+      <a href="/2015/07/09/Apache下mod_rpaf模块安装/" class="article-date">
+  	<time datetime="2015-07-09T14:34:24.000Z" itemprop="datePublished">2015-07-09</time>
 </a>
-        </div>
-    	 
+    </div>
   
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2015/07/07/(转载)业务安全漏洞挖掘归纳总结/">(转载)业务安全漏洞挖掘归纳总结</a>
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      Apache下mod_rpaf模块安装
     </h1>
   
 
-        <div class="article-info info-on-right">
-          
+      </header>
+      
+      <div class="article-info article-info-post">
+        
 	<div class="article-tag tagcloud">
-		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/safe/">safe</a></li></ul>
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/OPS/">OPS</a></li></ul>
 	</div>
 
-          
+        
 
-        </div>
         <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-  
-    </div></section>
-  
-
+      </div>
+      
     
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h5 id="mod_rpaf是apache的一个模块，目的是为了获取访客的真实IP，下面是安装方法">mod_rpaf是apache的一个模块，目的是为了获取访客的真实IP，下面是安装方法</h5><p><br></p>
+<h4 id="安装apache开发组件">安装apache开发组件</h4><pre><code>yum <span class="keyword">install</span> httpd-devel
+</code></pre><h4 id="下载插件并编译安装">下载插件并编译安装</h4><pre><code>wget ftp:<span class="comment">//ftp.tr.debian.org/gentoo/distfiles/mod_rpaf-0.6.tar.gz</span>
+tar xvfz mod_rpaf-<span class="number">0.6</span><span class="class">.tar</span><span class="class">.gz</span>
+cd mod_rpaf-<span class="number">0.6</span>
+apxs -<span class="tag">i</span> -c -n mod_rpaf-<span class="number">2.0</span><span class="class">.so</span> mod_rpaf-<span class="number">2.0</span><span class="class">.c</span>
+chmod <span class="number">755</span> /usr/lib64/httpd/modules/mod_rpaf-<span class="number">2.0</span>.so
+</code></pre><h4 id="配置文件加载模块">配置文件加载模块</h4><pre><code><span class="keyword"><span class="common">LoadModule</span></span> rpaf_module modules/mod_rpaf-2.0.so
+</code></pre><h4 id="配置组件">配置组件</h4><pre><code><span class="tag">RPAFenable</span> <span class="tag">On</span>
+<span class="tag">RPAFsethostname</span> <span class="tag">On</span>
+<span class="tag">RPAFproxy_ips</span> 10<span class="class">.1</span><span class="class">.1</span><span class="class">.2</span> 127<span class="class">.0</span><span class="class">.0</span><span class="class">.1</span>
+<span class="tag">RPAFheader</span> <span class="tag">X-Forwarded-For</span>
+</code></pre>
+      
+    </div>
+    
+  </div>
+  
+    
+<nav id="article-nav">
+  
+  
+    <a href="/2015/07/07/(转载)业务安全漏洞挖掘归纳总结/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">(转载)业务安全漏洞挖掘归纳总结</div>
+      <strong class="article-nav-caption">></strong>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+<div class="share">
+	<!-- JiaThis Button BEGIN -->
+	<div class="jiathis_style">
+		<span class="jiathis_txt">分享到：</span>
+		<a class="jiathis_button_tsina"></a>
+		<a class="jiathis_button_cqq"></a>
+		<a class="jiathis_button_douban"></a>
+		<a class="jiathis_button_weixin"></a>
+		<a class="jiathis_button_tumblr"></a>
+		<a href="http://www.jiathis.com/share" class="jiathis jiathis_txt jtico jtico_jiathis" target="_blank"></a>
+	</div>
+	<script type="text/javascript" src="http://v3.jiathis.com/code/jia.js?uid=1405949716054953" charset="utf-8"></script>
+	<!-- JiaThis Button END -->
+</div>
+
+
+
+<div class="duoshuo">
+	<!-- 多说评论框 start -->
+	<div class="ds-thread" data-thread-key="Apache下mod_rpaf模块安装" data-title="Apache下mod_rpaf模块安装" data-url="http://yunops.top/2015/07/09/Apache下mod_rpaf模块安装/"></div>
+	<!-- 多说评论框 end -->
+	<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+	<script type="text/javascript">
+	var duoshuoQuery = {short_name:"yunops"};
+	(function() {
+		var ds = document.createElement('script');
+		ds.type = 'text/javascript';ds.async = true;
+		ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+		ds.charset = 'UTF-8';
+		(document.getElementsByTagName('head')[0] 
+		 || document.getElementsByTagName('body')[0]).appendChild(ds);
+	})();
+	</script>
+	<!-- 多说公共JS代码 end -->
+</div>
+
+
+
 
 </div>
       <footer id="footer">
@@ -245,9 +319,9 @@
 		mathjax: true,
 		animate: true,
 		isHome: false,
-		isPost: false,
+		isPost: true,
 		isArchive: false,
-		isTag: true,
+		isTag: false,
 		isCategory: false,
 		open_in_new: false
 	}
