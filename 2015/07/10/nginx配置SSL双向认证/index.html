@@ -3,17 +3,33 @@
 <head>
   <meta charset="utf-8">
   
-  <title>云运维</title>
+  <title>nginx配置SSL双向认证 | 云运维</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description">
-<meta property="og:type" content="website">
-<meta property="og:title" content="云运维">
-<meta property="og:url" content="http://yunops.top/index.html">
+  <meta name="description" content="1.安装nginxrpm -ivh http://nginx.org/packages/centos/6/noarch/RPMS/nginx-release-centos-6-0.el6.ngx.noarch.rpm
+
+yum install nginx
+2.配置opensslvim /etc/pki/tls/openssl.cnf
+[ req_distinguished_name ]
+count">
+<meta property="og:type" content="article">
+<meta property="og:title" content="nginx配置SSL双向认证">
+<meta property="og:url" content="http://yunops.top/2015/07/10/nginx配置SSL双向认证/index.html">
 <meta property="og:site_name" content="云运维">
-<meta property="og:description">
+<meta property="og:description" content="1.安装nginxrpm -ivh http://nginx.org/packages/centos/6/noarch/RPMS/nginx-release-centos-6-0.el6.ngx.noarch.rpm
+
+yum install nginx
+2.配置opensslvim /etc/pki/tls/openssl.cnf
+[ req_distinguished_name ]
+count">
+<meta property="og:updated_time" content="2015-07-12T13:56:41.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="云运维">
-<meta name="twitter:description">
+<meta name="twitter:title" content="nginx配置SSL双向认证">
+<meta name="twitter:description" content="1.安装nginxrpm -ivh http://nginx.org/packages/centos/6/noarch/RPMS/nginx-release-centos-6-0.el6.ngx.noarch.rpm
+
+yum install nginx
+2.配置opensslvim /etc/pki/tls/openssl.cnf
+[ req_distinguished_name ]
+count">
   
     <link rel="alternative" href="/atom.xml" title="云运维" type="application/atom+xml">
   
@@ -173,9 +189,7 @@
 		</header>				
 	</div>
 </nav>
-      <div class="body-wrap">
-  
-    <article id="post-nginx配置SSL双向认证" class="article article-type-post" itemscope itemprop="blogPost">
+      <div class="body-wrap"><article id="post-nginx配置SSL双向认证" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
       <a href="/2015/07/10/nginx配置SSL双向认证/" class="article-date">
@@ -191,12 +205,23 @@
       <header class="article-header">
         
   
-    <h1 itemprop="name">
-      <a class="article-title" href="/2015/07/10/nginx配置SSL双向认证/">nginx配置SSL双向认证</a>
+    <h1 class="article-title" itemprop="name">
+      nginx配置SSL双向认证
     </h1>
   
 
       </header>
+      
+      <div class="article-info article-info-post">
+        
+	<div class="article-tag tagcloud">
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/OPS/">OPS</a></li></ul>
+	</div>
+
+        
+
+        <div class="clearfix"></div>
+      </div>
       
     
     <div class="article-entry" itemprop="articleBody">
@@ -264,236 +289,62 @@ ssl_ciphers <span class="constant">ECDHE</span>-<span class="constant">RSA</span
       
     </div>
     
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/OPS/">OPS</a></li></ul>
-	</div>
-
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-    
   </div>
+  
+    
+<nav id="article-nav">
+  
+  
+    <a href="/2015/07/09/Apache下mod_rpaf模块安装/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">Apache下mod_rpaf模块安装</div>
+      <strong class="article-nav-caption">></strong>
+    </a>
+  
+</nav>
+
   
 </article>
 
 
-
-
-
-
-
-  
-    <article id="post-Apache下mod_rpaf模块安装" class="article article-type-post" itemscope itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a href="/2015/07/09/Apache下mod_rpaf模块安装/" class="article-date">
-  	<time datetime="2015-07-09T14:34:24.000Z" itemprop="datePublished">2015-07-09</time>
-</a>
-    </div>
-  
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2015/07/09/Apache下mod_rpaf模块安装/">Apache下mod_rpaf模块安装</a>
-    </h1>
-  
-
-      </header>
-      
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h5 id="mod_rpaf是apache的一个模块，目的是为了获取访客的真实IP，下面是安装方法">mod_rpaf是apache的一个模块，目的是为了获取访客的真实IP，下面是安装方法</h5><p><br></p>
-<h4 id="安装apache开发组件">安装apache开发组件</h4><pre><code>yum <span class="keyword">install</span> httpd-devel
-</code></pre><h4 id="下载插件并编译安装">下载插件并编译安装</h4><pre><code>wget ftp:<span class="comment">//ftp.tr.debian.org/gentoo/distfiles/mod_rpaf-0.6.tar.gz</span>
-tar xvfz mod_rpaf-<span class="number">0.6</span><span class="class">.tar</span><span class="class">.gz</span>
-cd mod_rpaf-<span class="number">0.6</span>
-apxs -<span class="tag">i</span> -c -n mod_rpaf-<span class="number">2.0</span><span class="class">.so</span> mod_rpaf-<span class="number">2.0</span><span class="class">.c</span>
-chmod <span class="number">755</span> /usr/lib64/httpd/modules/mod_rpaf-<span class="number">2.0</span>.so
-</code></pre><h4 id="配置文件加载模块">配置文件加载模块</h4><pre><code><span class="keyword"><span class="common">LoadModule</span></span> rpaf_module modules/mod_rpaf-2.0.so
-</code></pre><h4 id="配置组件">配置组件</h4><pre><code><span class="tag">RPAFenable</span> <span class="tag">On</span>
-<span class="tag">RPAFsethostname</span> <span class="tag">On</span>
-<span class="tag">RPAFproxy_ips</span> 10<span class="class">.1</span><span class="class">.1</span><span class="class">.2</span> 127<span class="class">.0</span><span class="class">.0</span><span class="class">.1</span>
-<span class="tag">RPAFheader</span> <span class="tag">X-Forwarded-For</span>
-</code></pre>
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/OPS/">OPS</a></li></ul>
+<div class="share">
+	<!-- JiaThis Button BEGIN -->
+	<div class="jiathis_style">
+		<span class="jiathis_txt">分享到：</span>
+		<a class="jiathis_button_tsina"></a>
+		<a class="jiathis_button_cqq"></a>
+		<a class="jiathis_button_douban"></a>
+		<a class="jiathis_button_weixin"></a>
+		<a class="jiathis_button_tumblr"></a>
+		<a href="http://www.jiathis.com/share" class="jiathis jiathis_txt jtico jtico_jiathis" target="_blank"></a>
 	</div>
-
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-    
-  </div>
-  
-</article>
+	<script type="text/javascript" src="http://v3.jiathis.com/code/jia.js?uid=1405949716054953" charset="utf-8"></script>
+	<!-- JiaThis Button END -->
+</div>
 
 
 
-
-
-
-
-  
-    <article id="post-(转载)业务安全漏洞挖掘归纳总结" class="article article-type-post" itemscope itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a href="/2015/07/07/(转载)业务安全漏洞挖掘归纳总结/" class="article-date">
-  	<time datetime="2015-07-07T11:31:07.000Z" itemprop="datePublished">2015-07-07</time>
-</a>
-    </div>
-  
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2015/07/07/(转载)业务安全漏洞挖掘归纳总结/">(转载)业务安全漏洞挖掘归纳总结</a>
-    </h1>
-  
-
-      </header>
-      
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h3 id="0x00_索引说明">0x00 索引说明</h3><hr>
-<p>6.30在OWASP的分享，关于业务安全的漏洞检测模型。进一步的延伸科普。<br><img src="http://static.wooyun.org//drops/20150703/2015070302312847097.png" alt="001"><br><img src="http://static.wooyun.org//drops/20150703/2015070302312815571.png" alt="002"></p>
-<h3 id="0x01_身份认证安全">0x01 身份认证安全</h3><h5 id="1-暴力破解">1.暴力破解</h5><p>在没有验证码限制或者一次验证码可以多次使用的地方，使用已知用户对密码进行暴力破解或者用一个通用密码对用户进行暴力破解。 简单的验证码爆破。URL: <a href="http://zone.wooyun.org/content/20839">http://zone.wooyun.org/content/20839</a></p>
-<p>一些工具及脚本</p>
-<p>Burpsuite</p>
-<p>htpwdScan 撞库爆破必备 URL: <a href="https://github.com/lijiejie/htpwdScan">https://github.com/lijiejie/htpwdScan</a></p>
-<p>hydra 源码安装xhydra支持更多的协议去爆破 (可破WEB，其他协议不属于业务安全的范畴)<br>
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/safe/">safe</a></li></ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a  href="/2015/07/07/(转载)业务安全漏洞挖掘归纳总结/#more">more >></a>
-        </p>
-      
-      <div class="clearfix"></div>
-    </div>
-    
-  </div>
-  
-</article>
+<div class="duoshuo">
+	<!-- 多说评论框 start -->
+	<div class="ds-thread" data-thread-key="nginx配置SSL双向认证" data-title="nginx配置SSL双向认证" data-url="http://yunops.top/2015/07/10/nginx配置SSL双向认证/"></div>
+	<!-- 多说评论框 end -->
+	<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+	<script type="text/javascript">
+	var duoshuoQuery = {short_name:"yunops"};
+	(function() {
+		var ds = document.createElement('script');
+		ds.type = 'text/javascript';ds.async = true;
+		ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+		ds.charset = 'UTF-8';
+		(document.getElementsByTagName('head')[0] 
+		 || document.getElementsByTagName('body')[0]).appendChild(ds);
+	})();
+	</script>
+	<!-- 多说公共JS代码 end -->
+</div>
 
 
 
 
-
-
-
-  
-    <article id="post-(转载)MariaDB Galera Cluster 部署" class="article article-type-post" itemscope itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a href="/2015/07/07/(转载)MariaDB Galera Cluster 部署/" class="article-date">
-  	<time datetime="2015-07-06T23:07:07.000Z" itemprop="datePublished">2015-07-07</time>
-</a>
-    </div>
-  
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2015/07/07/(转载)MariaDB Galera Cluster 部署/">(转载)MariaDB Galera Cluster 部署（如何快速部署 MariaDB 集群）</a>
-    </h1>
-  
-
-      </header>
-      
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>MariaDB作为Mysql的一个分支，在开源项目中已经广泛使用，例如大热的openstack，所以，为了保证服务的高可用性，同时提高系统的负载能力，集群部署是必不可少的。</p>
-<h4 id="MariaDB_Galera_Cluster_介绍">MariaDB Galera Cluster 介绍</h4><hr>
-<p>MariaDB集群是MariaDB同步多主机集群。它仅支持XtraDB/ InnoDB存储引擎（虽然有对MyISAM实验支持 - 看wsrep_replicate_myisam系统变量）。</p>
-<h4 id="主要功能:">主要功能:</h4><ul>
-<li>同步复制</li>
-<li>真正的multi-master，即所有节点可以同时读写数据库</li>
-<li>自动的节点成员控制，失效节点自动被清除</li>
-<li>新节点加入数据自动复制</li>
-<li>真正的并行复制，行级</li>
-<li>用户可以直接连接集群，使用感受上与MySQL完全一致</li>
-</ul>
-<h4 id="优势：">优势：</h4><ul>
-<li>因为是多主，所以不存在Slavelag(延迟)</li>
-<li>不存在丢失事务的情况</li>
-<li>同时具有读和写的扩展能力</li>
-<li>更小的客户端延迟</li>
-<li>节点间数据是同步的,而Master/Slave模式是异步的,不同slave上的binlog可能是不同的</li>
-</ul>
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/DB/">DB</a></li></ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a  href="/2015/07/07/(转载)MariaDB Galera Cluster 部署/#more">more >></a>
-        </p>
-      
-      <div class="clearfix"></div>
-    </div>
-    
-  </div>
-  
-</article>
-
-
-
-
-
-
-
-  
-  
 </div>
       <footer id="footer">
   <div class="outer">
@@ -517,8 +368,8 @@ chmod <span class="number">755</span> /usr/lib64/httpd/modules/mod_rpaf-<span cl
 		fancybox: true,
 		mathjax: true,
 		animate: true,
-		isHome: true,
-		isPost: false,
+		isHome: false,
+		isPost: true,
 		isArchive: false,
 		isTag: false,
 		isCategory: false,
