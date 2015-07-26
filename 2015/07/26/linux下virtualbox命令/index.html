@@ -3,17 +3,30 @@
 <head>
   <meta charset="utf-8">
   
-  <title>云运维</title>
+  <title>linux下virtualbox命令 | 云运维</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description">
-<meta property="og:type" content="website">
-<meta property="og:title" content="云运维">
-<meta property="og:url" content="http://yunops.top/index.html">
+  <meta name="description" content="查看当前虚拟机VBxoManage list vms
+查看当前正在运行的虚拟机VBoxManage list runningvms
+启动虚拟机VBoxManage startvm win2
+无前端图形界面方式启动虚拟机VBoxManage startvm win2 --type headless
+使用 VRDP 方式通过命令行启动虚拟机： (3389)VBoxManage startvm win2">
+<meta property="og:type" content="article">
+<meta property="og:title" content="linux下virtualbox命令">
+<meta property="og:url" content="http://yunops.top/2015/07/26/linux下virtualbox命令/index.html">
 <meta property="og:site_name" content="云运维">
-<meta property="og:description">
+<meta property="og:description" content="查看当前虚拟机VBxoManage list vms
+查看当前正在运行的虚拟机VBoxManage list runningvms
+启动虚拟机VBoxManage startvm win2
+无前端图形界面方式启动虚拟机VBoxManage startvm win2 --type headless
+使用 VRDP 方式通过命令行启动虚拟机： (3389)VBoxManage startvm win2">
+<meta property="og:updated_time" content="2015-07-26T14:27:44.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="云运维">
-<meta name="twitter:description">
+<meta name="twitter:title" content="linux下virtualbox命令">
+<meta name="twitter:description" content="查看当前虚拟机VBxoManage list vms
+查看当前正在运行的虚拟机VBoxManage list runningvms
+启动虚拟机VBoxManage startvm win2
+无前端图形界面方式启动虚拟机VBoxManage startvm win2 --type headless
+使用 VRDP 方式通过命令行启动虚拟机： (3389)VBoxManage startvm win2">
   
     <link rel="alternative" href="/atom.xml" title="云运维" type="application/atom+xml">
   
@@ -188,9 +201,7 @@
 		</header>				
 	</div>
 </nav>
-      <div class="body-wrap">
-  
-    <article id="post-linux下virtualbox命令" class="article article-type-post" itemscope itemprop="blogPost">
+      <div class="body-wrap"><article id="post-linux下virtualbox命令" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
       <a href="/2015/07/26/linux下virtualbox命令/" class="article-date">
@@ -206,12 +217,23 @@
       <header class="article-header">
         
   
-    <h1 itemprop="name">
-      <a class="article-title" href="/2015/07/26/linux下virtualbox命令/">linux下virtualbox命令</a>
+    <h1 class="article-title" itemprop="name">
+      linux下virtualbox命令
     </h1>
   
 
       </header>
+      
+      <div class="article-info article-info-post">
+        
+	<div class="article-tag tagcloud">
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/OPS/">OPS</a></li></ul>
+	</div>
+
+        
+
+        <div class="clearfix"></div>
+      </div>
       
     
     <div class="article-entry" itemprop="articleBody">
@@ -406,349 +428,62 @@ VBoxManage convertdd        [-static] stdin <span class="variable">&lt;outputfil
       
     </div>
     
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/OPS/">OPS</a></li></ul>
-	</div>
-
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-    
   </div>
+  
+    
+<nav id="article-nav">
+  
+  
+    <a href="/2015/07/10/nginx配置SSL双向认证/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">nginx配置SSL双向认证</div>
+      <strong class="article-nav-caption">></strong>
+    </a>
+  
+</nav>
+
   
 </article>
 
 
-
-
-
-
-
-  
-    <article id="post-nginx配置SSL双向认证" class="article article-type-post" itemscope itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a href="/2015/07/10/nginx配置SSL双向认证/" class="article-date">
-  	<time datetime="2015-07-10T10:13:40.000Z" itemprop="datePublished">2015-07-10</time>
-</a>
-    </div>
-  
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2015/07/10/nginx配置SSL双向认证/">nginx配置SSL双向认证</a>
-    </h1>
-  
-
-      </header>
-      
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h4 id="1-安装nginx">1.安装nginx</h4><pre><code>rpm -ivh <span class="symbol">http:</span>/<span class="regexp">/nginx.org/packages</span><span class="regexp">/centos/</span><span class="number">6</span>/noarch/<span class="constant">RPMS/</span>nginx-release-centos-<span class="number">6</span>-<span class="number">0</span>.el6.ngx.noarch.rpm
-
-yum install nginx
-</code></pre><h4 id="2-配置openssl">2.配置openssl</h4><pre><code>vim /etc/pki/tls/openssl.cnf
-[ req_distinguished_name ]
-<span class="variable">countryName                     =</span> Country Name(<span class="number">2</span> letter code)
-<span class="variable">countryName_default             =</span> CN
-<span class="variable">countryName_min                 =</span> <span class="number">2</span>
-<span class="variable">countryName_max                 =</span> <span class="number">2</span>
-<span class="variable">stateOrProvinceName             =</span> State <span class="constant">or</span> Province Name (full name)
-<span class="variable">stateOrProvinceName_default     =</span> ZJ
-<span class="variable">localityName                    =</span> Locality Name (eg, city)
-<span class="variable">localityName_default            =</span> HZ
-<span class="number">0</span>.<span class="variable">organizationName              =</span> Organization Name (eg, company)
-<span class="number">0</span>.<span class="variable">organizationName_default      =</span> Tech
-<span class="variable">organizationalUnitName          =</span> Organizational Unit Name (eg, section)
-<span class="variable">organizationalUnitName_default  =</span> Org
-</code></pre><p>确保以上字段在证书，服务端证书，客户端证书一致。</p>
-<h5 id="创建证书的私钥">创建证书的私钥</h5><pre><code>cd <span class="regexp">/etc/</span>pki<span class="regexp">/CA/</span><span class="keyword">private</span>
-umask <span class="number">077</span>
-openssl genrsa -out cakey.pem <span class="number">2048</span>
-</code></pre><h5 id="生成自签证书">生成自签证书</h5><pre><code>cd <span class="regexp">/etc/</span>pki<span class="regexp">/CA/</span>
-openssl req -<span class="keyword">new</span> -x509 -key <span class="keyword">private</span><span class="regexp">/cakey.pem -out cacert.pem -days 3655</span>
-</code></pre><h5 id="PS:填坑">PS:填坑</h5><pre><code>openssl ca -<span class="keyword">in</span> nginx.csr -out nginx.crt -days <span class="number">3650</span>
-Using configuration from <span class="regexp">/etc/</span>pki<span class="regexp">/tls/</span>openssl.cnf
-unable to load number from <span class="regexp">/etc/</span>pki<span class="regexp">/CA/</span>serial
-error <span class="keyword">while</span> loading serial number
-<span class="number">140311870949192</span>:<span class="string">error:</span><span class="number">0</span><span class="string">D066096:</span>asn1 encoding     <span class="string">routines:</span><span class="string">a2i_ASN1_INTEGER:</span><span class="typename">short</span> <span class="string">line:</span>f_int.<span class="string">c:</span><span class="number">215</span>:
-</code></pre><p>生成过程中遇到了该错误，用一下代码解决：</p>
-<pre><code><span class="keyword">cd</span> /etc/pki/<span class="keyword">CA</span>
-echo <span class="string">"00"</span> &gt;serial
-<span class="keyword">cat</span> serial
-</code></pre><h5 id="创建服务器证书">创建服务器证书</h5><pre><code><span class="attribute">mask</span> <span class="number">077</span>
-openssl genrsa -out nginx<span class="class">.key</span> <span class="number">1024</span>
-openssl req -new -key nginx<span class="class">.key</span> -out nginx<span class="class">.csr</span>
-openssl ca -<span class="keyword">in</span> nginx<span class="class">.csr</span> -out nginx<span class="class">.crt</span> -days <span class="number">3650</span>
-</code></pre><h5 id="创建客户端证书">创建客户端证书</h5><pre><code>umask <span class="number">077</span>
-openssl genrsa -out client<span class="class">.key</span> <span class="number">1024</span>
-openssl req -new -key client<span class="class">.key</span> -out client<span class="class">.csr</span>
-openssl ca -<span class="keyword">in</span> client<span class="class">.csr</span> -out client<span class="class">.crt</span> -days <span class="number">3650</span>
-</code></pre><h5 id="PS：填坑">PS：填坑</h5><pre><code>failed <span class="keyword">to</span> update database
-TXT_DB <span class="keyword">error</span> <span class="type">number</span> <span class="number">2</span>
-</code></pre><p>该错误是因为多次生成证书造成/etc/pki/CA/index.txt存在</p>
-<pre><code>rm -rf <span class="regexp">/etc/</span>pki<span class="regexp">/CA/i</span>ndex.txt
-touch <span class="regexp">/etc/</span>pki<span class="regexp">/CA/i</span>ndex.txt
-问题解决
-</code></pre><p>生成完成后进行证书类型转换</p>
-<pre><code>openssl pkcs12 -export -clcerts -<span class="keyword">in</span> client<span class="class">.crt</span> -inkey client<span class="class">.key</span> -out client.p12
-</code></pre><h5 id="配置nginx服务器验证">配置nginx服务器验证</h5><pre><code>ssl on;
-ssl_protocols <span class="constant">TLSv1</span> <span class="constant">TLSv1</span>.<span class="number">1</span> <span class="constant">TLSv1</span>.<span class="number">2</span>;
-ssl_verify_client on; <span class="comment">##双向认证</span>
-ssl_prefer_server_ciphers on;
-ssl_session_timeout <span class="number">5</span>m;
-ssl_session_cache <span class="symbol">builtin:</span><span class="number">1000</span> <span class="symbol">shared:</span><span class="constant">SSL</span><span class="symbol">:</span><span class="number">10</span>m;
-ssl_certificate      nginx.crt;
-ssl_certificate_key  nginx.key;
-ssl_client_certificate /etc/pki/<span class="constant">CA</span>/cacert.pem；
-ssl_ciphers <span class="constant">ECDHE</span>-<span class="constant">RSA</span>-<span class="constant">AES128</span>-<span class="constant">GCM</span>-<span class="constant">SHA256</span><span class="symbol">:ECDHE-ECDSA-AES128-GCM-SHA256</span><span class="symbol">:ECDHE-RSA-AES256-GCM-SHA384</span><span class="symbol">:ECDHE-ECDSA-AES256-GCM-SHA384</span><span class="symbol">:DHE-RSA-AES128-GCM-SHA256</span><span class="symbol">:DHE-DSS-AES128-GCM-SHA256</span><span class="symbol">:kEDH+AESGCM</span><span class="symbol">:ECDHE-RSA-AES128-SHA256</span><span class="symbol">:ECDHE-ECDSA-AES128-SHA256</span><span class="symbol">:ECDHE-RSA-AES128-SHA</span><span class="symbol">:ECDHE-ECDSA-AES128-SHA</span><span class="symbol">:ECDHE-RSA-AES256-SHA384</span><span class="symbol">:ECDHE-ECDSA-AES256-SHA384</span><span class="symbol">:ECDHE-RSA-AES256-SHA</span><span class="symbol">:ECDHE-ECDSA-AES256-SHA</span><span class="symbol">:DHE-RSA-AES128-SHA256</span><span class="symbol">:DHE-RSA-AES128-SHA</span><span class="symbol">:DHE-DSS-AES128-SHA256</span><span class="symbol">:DHE-RSA-AES256-SHA256</span><span class="symbol">:DHE-DSS-AES256-SHA</span><span class="symbol">:DHE-RSA-AES256-SHA</span><span class="symbol">:AES128-GCM-SHA256</span><span class="symbol">:AES256-GCM-SHA384</span><span class="symbol">:AES128-SHA256</span><span class="symbol">:AES256-SHA256</span><span class="symbol">:AES128-SHA</span><span class="symbol">:AES256-SHA</span><span class="symbol">:AES</span><span class="symbol">:CAMELLIA</span><span class="symbol">:DES-CBC3-SHA</span><span class="symbol">:</span>!<span class="symbol">aNULL:</span>!<span class="symbol">eNULL:</span>!<span class="constant">EXPORT</span><span class="symbol">:</span>!<span class="constant">DES</span><span class="symbol">:</span>!<span class="constant">RC4</span><span class="symbol">:</span>!<span class="constant">MD5</span><span class="symbol">:</span>!<span class="constant">PSK</span><span class="symbol">:</span>!<span class="symbol">aECDH:</span>!<span class="constant">EDH</span>-<span class="constant">DSS</span>-<span class="constant">DES</span>-<span class="constant">CBC3</span>-<span class="constant">SHA</span><span class="symbol">:</span>!<span class="constant">EDH</span>-<span class="constant">RSA</span>-<span class="constant">DES</span>-<span class="constant">CBC3</span>-<span class="constant">SHA</span><span class="symbol">:</span>!<span class="constant">KRB5</span>-<span class="constant">DES</span>-<span class="constant">CBC3</span>-<span class="constant">SHA</span>;
-</code></pre><h5 id="配置本地证书">配置本地证书</h5><pre><code><span class="keyword">client</span>.p12下载到本地导入即可。
-</code></pre>
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/OPS/">OPS</a></li></ul>
+<div class="share">
+	<!-- JiaThis Button BEGIN -->
+	<div class="jiathis_style">
+		<span class="jiathis_txt">分享到：</span>
+		<a class="jiathis_button_tsina"></a>
+		<a class="jiathis_button_cqq"></a>
+		<a class="jiathis_button_douban"></a>
+		<a class="jiathis_button_weixin"></a>
+		<a class="jiathis_button_tumblr"></a>
+		<a href="http://www.jiathis.com/share" class="jiathis jiathis_txt jtico jtico_jiathis" target="_blank"></a>
 	</div>
-
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-    
-  </div>
-  
-</article>
+	<script type="text/javascript" src="http://v3.jiathis.com/code/jia.js?uid=1405949716054953" charset="utf-8"></script>
+	<!-- JiaThis Button END -->
+</div>
 
 
 
-
-
-
-
-  
-    <article id="post-Apache下mod_rpaf模块安装" class="article article-type-post" itemscope itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a href="/2015/07/09/Apache下mod_rpaf模块安装/" class="article-date">
-  	<time datetime="2015-07-09T14:34:24.000Z" itemprop="datePublished">2015-07-09</time>
-</a>
-    </div>
-  
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2015/07/09/Apache下mod_rpaf模块安装/">Apache下mod_rpaf模块安装</a>
-    </h1>
-  
-
-      </header>
-      
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h5 id="mod_rpaf是apache的一个模块，目的是为了获取访客的真实IP，下面是安装方法">mod_rpaf是apache的一个模块，目的是为了获取访客的真实IP，下面是安装方法</h5><p><br></p>
-<h4 id="安装apache开发组件">安装apache开发组件</h4><pre><code>yum <span class="keyword">install</span> httpd-devel
-</code></pre><h4 id="下载插件并编译安装">下载插件并编译安装</h4><pre><code>wget ftp:<span class="comment">//ftp.tr.debian.org/gentoo/distfiles/mod_rpaf-0.6.tar.gz</span>
-tar xvfz mod_rpaf-<span class="number">0.6</span><span class="class">.tar</span><span class="class">.gz</span>
-cd mod_rpaf-<span class="number">0.6</span>
-apxs -<span class="tag">i</span> -c -n mod_rpaf-<span class="number">2.0</span><span class="class">.so</span> mod_rpaf-<span class="number">2.0</span><span class="class">.c</span>
-chmod <span class="number">755</span> /usr/lib64/httpd/modules/mod_rpaf-<span class="number">2.0</span>.so
-</code></pre><h4 id="配置文件加载模块">配置文件加载模块</h4><pre><code><span class="keyword"><span class="common">LoadModule</span></span> rpaf_module modules/mod_rpaf-2.0.so
-</code></pre><h4 id="配置组件">配置组件</h4><pre><code><span class="tag">RPAFenable</span> <span class="tag">On</span>
-<span class="tag">RPAFsethostname</span> <span class="tag">On</span>
-<span class="tag">RPAFproxy_ips</span> 10<span class="class">.1</span><span class="class">.1</span><span class="class">.2</span> 127<span class="class">.0</span><span class="class">.0</span><span class="class">.1</span>
-<span class="tag">RPAFheader</span> <span class="tag">X-Forwarded-For</span>
-</code></pre>
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/OPS/">OPS</a></li></ul>
-	</div>
-
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-    
-  </div>
-  
-</article>
+<div class="duoshuo">
+	<!-- 多说评论框 start -->
+	<div class="ds-thread" data-thread-key="linux下virtualbox命令" data-title="linux下virtualbox命令" data-url="http://yunops.top/2015/07/26/linux下virtualbox命令/"></div>
+	<!-- 多说评论框 end -->
+	<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+	<script type="text/javascript">
+	var duoshuoQuery = {short_name:"yunops"};
+	(function() {
+		var ds = document.createElement('script');
+		ds.type = 'text/javascript';ds.async = true;
+		ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+		ds.charset = 'UTF-8';
+		(document.getElementsByTagName('head')[0] 
+		 || document.getElementsByTagName('body')[0]).appendChild(ds);
+	})();
+	</script>
+	<!-- 多说公共JS代码 end -->
+</div>
 
 
 
 
-
-
-
-  
-    <article id="post-(转载)业务安全漏洞挖掘归纳总结" class="article article-type-post" itemscope itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a href="/2015/07/07/(转载)业务安全漏洞挖掘归纳总结/" class="article-date">
-  	<time datetime="2015-07-07T11:31:07.000Z" itemprop="datePublished">2015-07-07</time>
-</a>
-    </div>
-  
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2015/07/07/(转载)业务安全漏洞挖掘归纳总结/">(转载)业务安全漏洞挖掘归纳总结</a>
-    </h1>
-  
-
-      </header>
-      
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h3 id="0x00_索引说明">0x00 索引说明</h3><hr>
-<p>6.30在OWASP的分享，关于业务安全的漏洞检测模型。进一步的延伸科普。<br><img src="http://static.wooyun.org//drops/20150703/2015070302312847097.png" alt="001"><br><img src="http://static.wooyun.org//drops/20150703/2015070302312815571.png" alt="002"></p>
-<h3 id="0x01_身份认证安全">0x01 身份认证安全</h3><h5 id="1-暴力破解">1.暴力破解</h5><p>在没有验证码限制或者一次验证码可以多次使用的地方，使用已知用户对密码进行暴力破解或者用一个通用密码对用户进行暴力破解。 简单的验证码爆破。URL: <a href="http://zone.wooyun.org/content/20839">http://zone.wooyun.org/content/20839</a></p>
-<p>一些工具及脚本</p>
-<p>Burpsuite</p>
-<p>htpwdScan 撞库爆破必备 URL: <a href="https://github.com/lijiejie/htpwdScan">https://github.com/lijiejie/htpwdScan</a></p>
-<p>hydra 源码安装xhydra支持更多的协议去爆破 (可破WEB，其他协议不属于业务安全的范畴)<br>
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/safe/">safe</a></li></ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a  href="/2015/07/07/(转载)业务安全漏洞挖掘归纳总结/#more">more >></a>
-        </p>
-      
-      <div class="clearfix"></div>
-    </div>
-    
-  </div>
-  
-</article>
-
-
-
-
-
-
-
-  
-    <article id="post-(转载)MariaDB Galera Cluster 部署" class="article article-type-post" itemscope itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a href="/2015/07/07/(转载)MariaDB Galera Cluster 部署/" class="article-date">
-  	<time datetime="2015-07-06T23:07:07.000Z" itemprop="datePublished">2015-07-07</time>
-</a>
-    </div>
-  
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2015/07/07/(转载)MariaDB Galera Cluster 部署/">(转载)MariaDB Galera Cluster 部署（如何快速部署 MariaDB 集群）</a>
-    </h1>
-  
-
-      </header>
-      
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>MariaDB作为Mysql的一个分支，在开源项目中已经广泛使用，例如大热的openstack，所以，为了保证服务的高可用性，同时提高系统的负载能力，集群部署是必不可少的。</p>
-<h4 id="MariaDB_Galera_Cluster_介绍">MariaDB Galera Cluster 介绍</h4><hr>
-<p>MariaDB集群是MariaDB同步多主机集群。它仅支持XtraDB/ InnoDB存储引擎（虽然有对MyISAM实验支持 - 看wsrep_replicate_myisam系统变量）。</p>
-<h4 id="主要功能:">主要功能:</h4><ul>
-<li>同步复制</li>
-<li>真正的multi-master，即所有节点可以同时读写数据库</li>
-<li>自动的节点成员控制，失效节点自动被清除</li>
-<li>新节点加入数据自动复制</li>
-<li>真正的并行复制，行级</li>
-<li>用户可以直接连接集群，使用感受上与MySQL完全一致</li>
-</ul>
-<h4 id="优势：">优势：</h4><ul>
-<li>因为是多主，所以不存在Slavelag(延迟)</li>
-<li>不存在丢失事务的情况</li>
-<li>同时具有读和写的扩展能力</li>
-<li>更小的客户端延迟</li>
-<li>节点间数据是同步的,而Master/Slave模式是异步的,不同slave上的binlog可能是不同的</li>
-</ul>
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/DB/">DB</a></li></ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a  href="/2015/07/07/(转载)MariaDB Galera Cluster 部署/#more">more >></a>
-        </p>
-      
-      <div class="clearfix"></div>
-    </div>
-    
-  </div>
-  
-</article>
-
-
-
-
-
-
-
-  
-  
 </div>
       <footer id="footer">
   <div class="outer">
@@ -772,8 +507,8 @@ chmod <span class="number">755</span> /usr/lib64/httpd/modules/mod_rpaf-<span cl
 		fancybox: true,
 		mathjax: true,
 		animate: true,
-		isHome: true,
-		isPost: false,
+		isHome: false,
+		isPost: true,
 		isArchive: false,
 		isTag: false,
 		isCategory: false,
