@@ -3,18 +3,18 @@
 <head>
   <meta charset="utf-8">
   
-  <title>aboutme | 云运维</title>
+  <title>beanstalkd性能监控脚本 | 云运维</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="奋战在运维第一线的小哥。">
-<meta property="og:type" content="website">
-<meta property="og:title" content="aboutme">
-<meta property="og:url" content="http://yunops.top/aboutme/index.html">
+  <meta name="description" content="1234567891011121314151617181920#!/bin/bash HOST=ipPORT=11300function urgent &amp;#123;echo -e &amp;quot;stats\r&amp;quot; | nc $HOST $PORT | grep &amp;apos;current-jobs-urgent&amp;apos; | grep -E -o &amp;quot;[0-9]+&amp;quot;&amp;#1">
+<meta property="og:type" content="article">
+<meta property="og:title" content="beanstalkd性能监控脚本">
+<meta property="og:url" content="http://yunops.top/2016/07/04/beanstalkd性能监控脚本/index.html">
 <meta property="og:site_name" content="云运维">
-<meta property="og:description" content="奋战在运维第一线的小哥。">
-<meta property="og:updated_time" content="2016-07-04T13:41:57.000Z">
+<meta property="og:description" content="1234567891011121314151617181920#!/bin/bash HOST=ipPORT=11300function urgent &amp;#123;echo -e &amp;quot;stats\r&amp;quot; | nc $HOST $PORT | grep &amp;apos;current-jobs-urgent&amp;apos; | grep -E -o &amp;quot;[0-9]+&amp;quot;&amp;#1">
+<meta property="og:updated_time" content="2016-07-04T14:12:27.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="aboutme">
-<meta name="twitter:description" content="奋战在运维第一线的小哥。">
+<meta name="twitter:title" content="beanstalkd性能监控脚本">
+<meta name="twitter:description" content="1234567891011121314151617181920#!/bin/bash HOST=ipPORT=11300function urgent &amp;#123;echo -e &amp;quot;stats\r&amp;quot; | nc $HOST $PORT | grep &amp;apos;current-jobs-urgent&amp;apos; | grep -E -o &amp;quot;[0-9]+&amp;quot;&amp;#1">
   
     <link rel="alternative" href="/atom.xml" title="云运维" type="application/atom+xml">
   
@@ -189,11 +189,11 @@
 		</header>				
 	</div>
 </nav>
-      <div class="body-wrap"><article id="page-undefined" class="article article-type-page" itemscope itemprop="blogPost">
+      <div class="body-wrap"><article id="post-beanstalkd性能监控脚本" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
-      <a href="/aboutme/index.html" class="article-date">
-  	<time datetime="2016-07-04T12:10:17.000Z" itemprop="datePublished">2016-07-04</time>
+      <a href="/2016/07/04/beanstalkd性能监控脚本/" class="article-date">
+  	<time datetime="2016-07-04T14:27:24.000Z" itemprop="datePublished">2016-07-04</time>
 </a>
     </div>
   
@@ -206,7 +206,7 @@
         
   
     <h1 class="article-title" itemprop="name">
-      aboutme
+      beanstalkd性能监控脚本
     </h1>
   
 
@@ -214,6 +214,10 @@
       
       <div class="article-info article-info-post">
         
+	<div class="article-tag tagcloud">
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/OPS/">OPS</a></li></ul>
+	</div>
+
         
 
         <div class="clearfix"></div>
@@ -222,14 +226,23 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>奋战在运维第一线的小哥。</p>
-
+        <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">#!/bin/bash </div><div class="line">HOST=ip</div><div class="line">PORT=11300</div><div class="line">function urgent &#123;</div><div class="line">echo -e &quot;stats\r&quot; | nc $HOST $PORT | grep &apos;current-jobs-urgent&apos; | grep -E -o &quot;[0-9]+&quot;</div><div class="line">&#125;</div><div class="line">function ready &#123;</div><div class="line">echo -e &quot;stats\r&quot; | nc $HOST $PORT | grep &apos;current-jobs-ready&apos; | grep -E -o &quot;[0-9]+&quot;</div><div class="line">&#125;</div><div class="line">function reserved &#123;</div><div class="line">echo -e &quot;stats\r&quot; | nc $HOST $PORT | grep &apos;current-jobs-reserved&apos; | grep -E -o &quot;[0-9]+&quot;</div><div class="line">&#125;</div><div class="line">function delayed &#123;</div><div class="line">echo -e &quot;stats\r&quot; | nc $HOST $PORT | grep &apos;current-jobs-delayed&apos; | grep -E -o &quot;[0-9]+&quot;</div><div class="line">&#125;</div><div class="line">function buried &#123;</div><div class="line">echo -e &quot;stats\r&quot; | nc $HOST $PORT | grep &apos;current-jobs-buried&apos; | grep -E -o &quot;[0-9]+&quot;</div><div class="line">&#125;</div><div class="line">$1</div></pre></td></tr></table></figure>
       
     </div>
     
   </div>
   
     
+<nav id="article-nav">
+  
+  
+    <a href="/2015/07/26/linux下virtualbox命令/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">linux下virtualbox命令</div>
+      <strong class="article-nav-caption">></strong>
+    </a>
+  
+</nav>
+
   
 </article>
 
@@ -253,7 +266,7 @@
 
 <div class="duoshuo">
 	<!-- 多说评论框 start -->
-	<div class="ds-thread" data-thread-key="undefined" data-title="aboutme" data-url="http://yunops.top/aboutme/index.html"></div>
+	<div class="ds-thread" data-thread-key="beanstalkd性能监控脚本" data-title="beanstalkd性能监控脚本" data-url="http://yunops.top/2016/07/04/beanstalkd性能监控脚本/"></div>
 	<!-- 多说评论框 end -->
 	<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
 	<script type="text/javascript">
@@ -297,7 +310,7 @@
 		mathjax: true,
 		animate: true,
 		isHome: false,
-		isPost: false,
+		isPost: true,
 		isArchive: false,
 		isTag: false,
 		isCategory: false,
