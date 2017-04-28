@@ -3,16 +3,16 @@
 <head>
   <meta charset="utf-8">
   
-  <title>云运维</title>
+  <title>运维小站</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   <meta property="og:type" content="website">
-<meta property="og:title" content="云运维">
+<meta property="og:title" content="运维小站">
 <meta property="og:url" content="http://yunops.top/index.html">
-<meta property="og:site_name" content="云运维">
+<meta property="og:site_name" content="运维小站">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="云运维">
+<meta name="twitter:title" content="运维小站">
   
-    <link rel="alternative" href="/atom.xml" title="云运维" type="application/atom+xml">
+    <link rel="alternative" href="/atom.xml" title="运维小站" type="application/atom+xml">
   
   
     <link rel="icon" href="/favicon.png">
@@ -113,7 +113,7 @@
 				
 				<section class="switch-part switch-part2">
 					<div class="widget tagcloud" id="js-tagcloud">
-						<a href="/tags/DB/" style="font-size: 10px;">DB</a> <a href="/tags/OPS/" style="font-size: 20px;">OPS</a> <a href="/tags/safe/" style="font-size: 10px;">safe</a>
+						<a href="/tags/OPS/" style="font-size: 10px;">OPS</a>
 					</div>
 				</section>
 				
@@ -187,6 +187,70 @@
 </nav>
       <div class="body-wrap">
   
+    <article id="post-Nginx + Lua + Redis 实现灰度发布" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2017/03/01/Nginx + Lua + Redis 实现灰度发布/" class="article-date">
+  	<time datetime="2017-03-01T10:50:00.000Z" itemprop="datePublished">2017-03-01</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/03/01/Nginx + Lua + Redis 实现灰度发布/">Nginx + Lua + Redis 实现灰度发布</a>
+    </h1>
+  
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h5 id="本方法可以实现根据用户id判断，是否分发到灰度环境">本方法可以实现根据用户id判断，是否分发到灰度环境</h5><h5 id="proxy_a,proxy_b根据实际需求调整">proxy_a,proxy_b根据实际需求调整</h5><h4 id="lua代码">lua代码</h4><figure class="highlight lua"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div></pre></td><td class="code"><pre><div class="line"><span class="comment">--[[amour]]</span><span class="comment">--</span></div><div class="line"><span class="comment">--[[引入redis模块]]</span><span class="comment">--</span></div><div class="line"><span class="keyword">local</span> redis = <span class="built_in">require</span> <span class="string">"resty.redis"</span></div><div class="line"></div><div class="line"><span class="comment">--[[获取cookie为uid的浏览器数据]]</span><span class="comment">--</span></div><div class="line"><span class="keyword">local</span> uid, err = ngx.var.cookie_uid</div><div class="line"><span class="keyword">if</span> <span class="keyword">not</span> uid <span class="keyword">then</span></div><div class="line">	ngx.exec(<span class="string">"@proxy_b"</span>)</div><div class="line">	ngx.log(ngx.ERR, err)</div><div class="line"><span class="keyword">end</span></div><div class="line"></div><div class="line"><span class="comment">--[[链接redis获取数据]]</span><span class="comment">--</span></div><div class="line">redis:set_timeout(<span class="number">1000</span>)</div><div class="line"><span class="keyword">local</span> cache, err= redis.new()</div><div class="line">cache.connect(cache, <span class="string">'ip'</span>, <span class="string">'6379'</span>)</div><div class="line"><span class="keyword">if</span> <span class="keyword">not</span> cache <span class="keyword">then</span></div><div class="line">	ngx.exec(<span class="string">"@proxy_b"</span>)</div><div class="line">	ngx.log(ngx.ERR, err)</div><div class="line"><span class="keyword">end</span></div><div class="line"></div><div class="line"><span class="comment">--[[校对数据]]</span><span class="comment">--</span></div><div class="line"><span class="keyword">local</span> res, err = cache:get(<span class="string">"uid"</span>)</div><div class="line"><span class="keyword">if</span> <span class="keyword">not</span> res <span class="keyword">then</span></div><div class="line">	ngx.exec(<span class="string">"@proxy_b"</span>)</div><div class="line">	ngx.log(ngx.ERR, err)</div><div class="line"><span class="keyword">end</span></div><div class="line"></div><div class="line"><span class="keyword">local</span> regex = uid</div><div class="line"><span class="keyword">local</span> m = ngx.re.match(res, regex)</div><div class="line"><span class="keyword">if</span> m <span class="keyword">then</span></div><div class="line">	ngx.exec(<span class="string">"@proxy_a"</span>)</div><div class="line">	<span class="keyword">else</span> ngx.exec(<span class="string">"@proxy_b"</span>)</div><div class="line"><span class="keyword">end</span></div></pre></td></tr></table></figure>
+<h4 id="nginx_配置">nginx 配置</h4><h5 id="配置分发信息">配置分发信息</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">upstream proxy_a &#123;</div><div class="line">    server xxx.xxx.xxx.xxx:port;</div><div class="line">&#125;</div><div class="line"></div><div class="line">upstream proxy_b &#123;</div><div class="line">    server xxx.xxx.xxx.xxx:port;</div><div class="line">&#125;</div><div class="line">#####网站配置</div></pre></td></tr></table></figure>
+<pre><code><span class="tag">location</span> <span class="at_rule">@<span class="keyword">proxy_a</span> </span>{
+        <span class="tag">proxy_pass</span> <span class="rule"><span class="attribute">http</span>:<span class="value">//proxy_a</span></span>;
+}
+
+<span class="tag">location</span> <span class="at_rule">@<span class="keyword">proxy_b</span> </span>{
+        <span class="tag">proxy_pass</span> <span class="rule"><span class="attribute">http</span>:<span class="value">//proxy_b</span></span>;
+}
+</code></pre><p>```</p>
+
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/OPS/">OPS</a></li></ul>
+	</div>
+
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+
+  
     <article id="post-beanstalkd性能监控脚本" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
@@ -213,7 +277,62 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">#!/bin/bash </div><div class="line">HOST=ip</div><div class="line">PORT=11300</div><div class="line">function urgent &#123;</div><div class="line">echo -e &quot;stats\r&quot; | nc $HOST $PORT | grep &apos;current-jobs-urgent&apos; | grep -E -o &quot;[0-9]+&quot;</div><div class="line">&#125;</div><div class="line">function ready &#123;</div><div class="line">echo -e &quot;stats\r&quot; | nc $HOST $PORT | grep &apos;current-jobs-ready&apos; | grep -E -o &quot;[0-9]+&quot;</div><div class="line">&#125;</div><div class="line">function reserved &#123;</div><div class="line">echo -e &quot;stats\r&quot; | nc $HOST $PORT | grep &apos;current-jobs-reserved&apos; | grep -E -o &quot;[0-9]+&quot;</div><div class="line">&#125;</div><div class="line">function delayed &#123;</div><div class="line">echo -e &quot;stats\r&quot; | nc $HOST $PORT | grep &apos;current-jobs-delayed&apos; | grep -E -o &quot;[0-9]+&quot;</div><div class="line">&#125;</div><div class="line">function buried &#123;</div><div class="line">echo -e &quot;stats\r&quot; | nc $HOST $PORT | grep &apos;current-jobs-buried&apos; | grep -E -o &quot;[0-9]+&quot;</div><div class="line">&#125;</div><div class="line">$1</div></pre></td></tr></table></figure>
+        <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div></pre></td><td class="code"><pre><div class="line">#!/bin/bash</div><div class="line">HOST=ip</div><div class="line">PORT=11300</div><div class="line">function urgent &#123;</div><div class="line">echo -e &quot;stats\r&quot; | nc $HOST $PORT | grep &apos;current-jobs-urgent&apos; | grep -E -o &quot;[0-9]+&quot;</div><div class="line">&#125;</div><div class="line">function ready &#123;</div><div class="line">echo -e &quot;stats\r&quot; | nc $HOST $PORT | grep &apos;current-jobs-ready&apos; | grep -E -o &quot;[0-9]+&quot;</div><div class="line">&#125;</div><div class="line">function reserved &#123;</div><div class="line">echo -e &quot;stats\r&quot; | nc $HOST $PORT | grep &apos;current-jobs-reserved&apos; | grep -E -o &quot;[0-9]+&quot;</div><div class="line">&#125;</div><div class="line">function delayed &#123;</div><div class="line">echo -e &quot;stats\r&quot; | nc $HOST $PORT | grep &apos;current-jobs-delayed&apos; | grep -E -o &quot;[0-9]+&quot;</div><div class="line">&#125;</div><div class="line">function buried &#123;</div><div class="line">echo -e &quot;stats\r&quot; | nc $HOST $PORT | grep &apos;current-jobs-buried&apos; | grep -E -o &quot;[0-9]+&quot;</div><div class="line">&#125;</div><div class="line">$1</div></pre></td></tr></table></figure>
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/OPS/">OPS</a></li></ul>
+	</div>
+
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+
+  
+    <article id="post-phantomjs安装教程" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2016/05/01/phantomjs安装教程/" class="article-date">
+  	<time datetime="2016-05-01T06:22:21.000Z" itemprop="datePublished">2016-05-01</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2016/05/01/phantomjs安装教程/">phantomjs安装</a>
+    </h1>
+  
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h5 id="操作系统">操作系统</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">system:centos 6.8</div></pre></td></tr></table></figure>
+<h5 id="安装过程">安装过程</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">wget https://bitbucket.org/ariya/phantomjs/downloads/phantomjs-2.1.1-linux-x86_64.tar.bz2</div><div class="line">tar jxvf phantomjs-2.1.1-linux-x86_64.tar.bz2</div><div class="line">mv phantomjs-2.1.1-linux-x86_64 /usr/local/src/phantomjs</div><div class="line">ln -sf /usr/local/src/phantomjs/bin/phantomjs /usr/bin/</div><div class="line">phantomjs -v</div></pre></td></tr></table></figure>
       
     </div>
     
@@ -272,187 +391,6 @@
 </code></pre><h4 id="启动虚拟机">启动虚拟机</h4><pre><code><span class="title">VBoxManage</span> startvm win2
 </code></pre><h4 id="无前端图形界面方式启动虚拟机">无前端图形界面方式启动虚拟机</h4><pre><code>VBoxManage startvm win2 --<span class="class"><span class="keyword">type</span> <span class="title">headless</span></span>
 </code></pre><h4 id="使用_VRDP_方式通过命令行启动虚拟机：_(3389)">使用 VRDP 方式通过命令行启动虚拟机： (3389)</h4><pre><code>VBoxManage startvm win2 --<span class="class"><span class="keyword">type</span> <span class="title">vrdp</span></span>
-</code></pre><h4 id="关闭虚拟机">关闭虚拟机</h4><pre><code>VBoxManage controlvm win2 poweroff
-VBoxManage [-v|-version]         显示virtualbox的版本号
-VBoxManage -nologo               隐藏logo
-VBoxManage -convertSettings      允许自动转换设置文件
-VBoxManage -convertSettingsBackup 允许自动转换设置文件，并在转换前作备份
-VBoxManage -convertSettingsIgnore 允许自动转换设置文件，但是不保存结果
-VBoxManage list vms|runningvms   显示列表虚拟机|正在运行的虚拟机
-               |ostypes|hostdvds virtualbox支持的系统类型|宿主机的光盘驱动器
-               |hostfloppies     宿主机的软盘驱动器
-               |hostifs|hostinfo 宿主机的网络接口|宿主机的信息
-               |hdds|dvds        已注册的虚拟硬盘|已注册的虚拟光盘
-               |floppies|usbhost 已注册的虚拟软盘|宿主机的USB设备
-               |usbfilters       USB筛选器
-               |systemproperties 虚拟机的基本信息
-VBoxManage showvminfo <span class="variable">&lt;uuid&gt;</span>|<span class="variable">&lt;name&gt;</span>     显示指定虚拟机的信息
-                     [-details]         显示详细信息
-                     [-statistics]      显示统计信息
-                     [-machinereadable] 以清晰的格式显示虚拟机信息
-VBoxManage registervm <span class="variable">&lt;filename&gt;</span>       将指定文件所在的虚拟机添加到列表
-VBoxManage unregistervm <span class="variable">&lt;uuid&gt;</span>|<span class="variable">&lt;name&gt;</span>   从虚拟机列表清除指定的虚拟机
-                        [-delete]       从虚拟机列表删除指定的虚拟机
-VBoxManage createvm     -name <span class="variable">&lt;name&gt;</span>    创建指定名称的虚拟机
-                        [-register]      将创建的虚拟机添加到列表
-                        [-basefolder <span class="variable">&lt;path&gt;</span> 指定虚拟机的基础目录
-                        [-settingsfile <span class="variable">&lt;path&gt;</span>] 指定虚拟机配置文件的基础目录
-                        [-uuid <span class="variable">&lt;uuid&gt;</span>] 创建指定uuid的虚拟机
-VBoxManage modifyvm     <span class="variable">&lt;uuid|name&gt;</span>       编辑指定的虚拟机的配置
-                        [-name <span class="variable">&lt;name&gt;</span>]    修改虚拟机的名称
-                        [-ostype <span class="variable">&lt;ostype&gt;</span>]修改虚拟机的操作系统类型
-                        [-memory <span class="variable">&lt;memorysize&gt;</span>]   修改虚拟机的内存大小
-                        [-vram <span class="variable">&lt;vramsize&gt;</span>]       修改虚拟机的显存大小
-                        [-acpi <span class="keyword">on</span>|off]           启动或禁止acpi电源管理接口
-                        [-ioapic <span class="keyword">on</span>|off]         启动或禁止I/O APIC电源管理接口
-                        [-pae <span class="keyword">on</span>|off]            启动或禁止CPU的PAE支持，PAE是
-Physical Address Extension : 物理地址扩展
-                        [-hwvirtex <span class="keyword">on</span>|off|<span class="keyword">default</span>]启动或禁止CPU的硬件虚拟化支持
-                        [-nestedpaging <span class="keyword">on</span>|off]    开启或关闭CPU的嵌套页面列表支持
-                        [-monitorcount <span class="variable">&lt;number&gt;</span>] 设置显示器数目，VRDP多用户模式时                        [-bioslogofadein <span class="keyword">on</span>|off]     开启或关闭bioslogo渐显效果
-                        [-bioslogofadeout <span class="keyword">on</span>|off] 开启或关闭bioslogo渐隐效果
-                        [-bioslogodisplaytime <span class="variable">&lt;msec&gt;</span>]设置bioslogo显示时间（以毫秒为单位)
-                        [-bioslogoimagepath <span class="variable">&lt;imagepath&gt;</span>]设置bioslogo图像路径，用于自定义bioslogo
-                        [-biosbootmenu disabled| 设置是否显示bios启动菜单 关闭
-                                       menuonly| 只菜单
-                                       messageandmenu] 信息和菜单
-                        [-biossystemtimeoffset <span class="variable">&lt;msec&gt;</span>] 设置bios系统时间补偿（以毫秒为单位）
-                        [-biospxedebug <span class="keyword">on</span>|off] 打开或关闭biospxe调试
-                        [-boot<span class="variable">&lt;1-4&gt;</span> <span class="keyword">none</span>|floppy|dvd|disk|net&amp;gt;] 设置启动顺序
-                        [-hd<span class="variable">&lt;a|b|d&gt;</span> <span class="keyword">none</span>|<span class="variable">&lt;uuid&gt;</span>|<span class="variable">&lt;filename&gt;</span>]     为虚拟机添加三个IDE设备之一（第<span class="number">2</span>个主盘被vm保留作为光驱，不能占用）在三个IDE中，你可以指定（硬盘）的vdi文件名或者它的UUID
-                        [-idecontroller PIIX3|PIIX4] 设置IDE控制器的类型
-                        [-sata <span class="keyword">on</span>|off] 开启或关闭SATA硬盘控制器
-                        [-sataportcount <span class="variable">&lt;1-30&gt;</span>] 设置虚拟机最多支持的SATA控制器数目
-                        [-sataport<span class="variable">&lt;1-30&gt;</span> <span class="keyword">none</span>| 没有硬盘连接到SATA控制器
-                                       <span class="variable">&lt;uuid&gt;</span>| 指定uuid的硬盘连接到SATA控制器
-                                       <span class="variable">&lt;filename&gt;</span>] 指定文件名的硬盘连接到SATA控制器
-                        [-sataideemulation<span class="variable">&lt;1-4&gt;</span> <span class="variable">&lt;1-30&gt;</span>] 指定一个SATA设备工作在IDE兼容模式，IDE设备编号是<span class="number">1</span>-<span class="number">4</span>，SATA设备编号是<span class="number">1</span>-<span class="number">30</span>
-                        [-dvd <span class="keyword">none</span>| 不连接DVD光驱
-                            <span class="variable">&lt;uuid&gt;</span>| 指定UUID的DVD光驱连接
-                        <span class="variable">&lt;filename&gt;</span>| 将指定的光盘映像文件挂接到DVD光驱
-                      host:<span class="variable">&lt;drive&gt;</span>] 将宿主机的DVD光驱挂接到虚拟机的DVD光驱
-                        [-dvdpassthrough <span class="keyword">on</span>|off]打开|关闭虚拟机里光盘的刻录功能
-                        [-floppy disabled| 不连接软驱
-                                    empty| 连接软驱但不插入软盘
-                                   <span class="variable">&lt;uuid&gt;</span>| 指定UUID的软驱连接
-                               <span class="variable">&lt;filename&gt;</span>| 将指定的软盘映像文件挂接到软驱驱
-                             host:<span class="variable">&lt;drive&gt;</span>] 将宿主机的软驱驱挂接到虚拟机的软驱
-                        [-nic<span class="variable">&lt;1-N&gt;</span> <span class="keyword">none</span>| 虚拟机不添加网卡
-                                   null| 虚拟机有网卡但不连接
-                                    nat| 网络连接使用NAT模式
-                                 hostif| 网络连接使用桥接模式
-                                 intnet] 网络连接使用内部网络模式
-                        [-nictype<span class="variable">&lt;1-N&gt;</span> Am79C970A| 虚拟机连接AMD PCNet PCI II网卡
-                                        Am79C973| 虚拟机连接AMD PCNet FAST III网卡（默认）
-                                         <span class="number">82540</span>EM| 虚拟机连接Intel PRO/<span class="number">1000</span> MT Desktop网卡
-                                         <span class="number">82543</span>GC] 虚拟机连接Intel PRO/<span class="number">1000</span> T Server网卡
-                        [-cableconnected<span class="variable">&lt;1-N&gt;</span> <span class="keyword">on</span>|off]插入或拔出网线
-                        [-nictrace<span class="variable">&lt;1-N&gt;</span> <span class="keyword">on</span>|off] 开启或关闭网络追踪
-                        [-nictracefile<span class="variable">&lt;1-N&gt;</span> <span class="variable">&lt;filename&gt;</span>] 将网络流量追踪数据保存到文件
-                        [-nicspeed<span class="variable">&lt;1-N&gt;</span> <span class="variable">&lt;kbps&gt;</span>] 设置网络连接的速度
-                        [-hostifdev<span class="variable">&lt;1-N&gt;</span> <span class="keyword">none</span>| 不连接到主机网络接口
-                                 <span class="variable">&lt;devicename&gt;</span>] 桥接模式下连接到指定的主机接口
-                        [-intnet<span class="variable">&lt;1-N&gt;</span> <span class="variable">&lt;network name&gt;</span>] 内网模式下为虚拟机指定内部网络名称
-                        [-natnet<span class="variable">&lt;1-N&gt;</span> <span class="variable">&lt;network&gt;</span>| 配置NAT网络接口的地址
-                                        <span class="keyword">default</span>] 默认NAT网络接口的地址是<span class="number">10.0</span>.x.<span class="number">0</span>/<span class="number">24</span>
-                        [-macaddress<span class="variable">&lt;1-N&gt;</span> auto| 自动生成虚拟网卡的MAC地址
-                                         <span class="variable">&lt;mac&gt;</span>] 指定虚拟网卡的MAC地址
-                        [-uart<span class="variable">&lt;1-N&gt;</span> off| 不启用虚拟串口
-                        <span class="variable">&lt;I/O base&gt;</span> <span class="variable">&lt;IRQ&gt;</span>]启用虚拟串口，并设置虚拟串口的I/O参数和IRQ参数
-                        [-uartmode<span class="variable">&lt;1-N&gt;</span> disconnected| 启用虚拟串口，但不连接到宿主机的串口
-                                       server <span class="variable">&lt;pipe&gt;</span>| 在宿主机创建PIPE通道，并将虚拟机串口连接到这个通道
-                                       client <span class="variable">&lt;pipe&gt;</span>| 不创建PIPE通道，而是将虚拟机串口连接到已存在的通道
-                                       <span class="variable">&lt;devicename&gt;</span>] 将虚拟机串口连接到宿主机的串口
-                        [-gueststatisticsinterval <span class="variable">&lt;seconds&gt;</span>] 配置虚拟机静态时间间隔
-                        [-audio <span class="keyword">none</span>| 虚拟机不连接声卡
-                                null| 将虚拟机的声卡连接到空的声音设备
-                              dsound] 将虚拟机的声卡连接到宿主机的声卡
-                        [-audiocontroller ac97| 将虚拟机声卡虚拟为ICH AC97声卡
-                                          sb16] 将虚拟机声卡虚拟为soundblaster <span class="number">16</span>声卡
-                        [-clipboard disabled| 不共享剪贴板
-                                 hosttoguest| 将宿主机的剪贴板共享给虚拟机
-                                 guesttohost| 将虚拟机的剪贴板共享给宿主机
-                               bidirectional] 宿主机和虚拟机共使用一个剪贴板
-                        [-vrdp <span class="keyword">on</span>|off] 开启|关闭virtualbox内置的VRDP服务器
-                        [-vrdpport <span class="keyword">default</span>| 使用默认的vrdp端口<span class="number">3389</span>
-                                    <span class="variable">&lt;port&gt;</span>] 指定vrdp端口
-                        [-vrdpaddress <span class="variable">&lt;host&gt;</span>] 指定VRDP主机地址
-                        [-vrdpauthtype null| 不用授权，任何客户机都可以连接到VRDP服务器
-                                   external| 只有宿主机的用户才可以连接到VRDP服务器
-                                      guest] 只有虚拟机的用户才可以连接到VRDP服务器
-                        [-vrdpmulticon <span class="keyword">on</span>|off] 打开|关闭VRDP多用户连接模式
-                        [-vrdpreusecon <span class="keyword">on</span>|off] 打开|关闭VRDP断线重连
-                        [-usb <span class="keyword">on</span>|off] 打开|关闭虚拟USB控制器
-                        [-usbehci <span class="keyword">on</span>|off] 打开|关闭虚拟USB2.<span class="number">0</span>控制器
-                        [-snapshotfolder <span class="keyword">default</span>| 将系统快照保存到默认文件夹
-                                          <span class="variable">&lt;path&gt;</span>] 将系统快照保存到指定文件夹
-VBoxManage startvm      <span class="variable">&lt;uuid&gt;</span>|<span class="variable">&lt;name&gt;</span> 开启指定UUID|名称的虚拟机
-                        [-type gui|vrdp] 设置虚拟机标准显示设备GUI界面|VRDP
-VBoxManage controlvm    <span class="variable">&lt;uuid&gt;</span>|<span class="variable">&lt;name&gt;</span> 改变正在运行的虚拟机的状态
-                         pause| 暂停，这时虚拟机窗口显示灰色
-                        resume| 恢复暂停的虚拟机
-                         reset| 复位
-                      poweroff| 强行关闭
-               acpipowerbutton| 关机
-               acpisleepbutton| 使虚拟机处于睡眠状态
-                     savestate| 保存状态然后关闭，相当于休眠
-           keyboardputscancode <span class="variable">&lt;hex&gt;</span> [<span class="variable">&lt;hex&gt;</span> ...] 键盘扫描码设置
-               setlinkstate<span class="variable">&lt;1-4&gt;</span> <span class="keyword">on</span>|off 连接|断开网络连接
-               usbattach <span class="variable">&lt;uuid&gt;</span>|<span class="variable">&lt;address&gt;</span> 连接到指定UUDI|地址的USB设备
-               usbdetach <span class="variable">&lt;uuid&gt;</span>|<span class="variable">&lt;address&gt;</span> 断开指定UUDI|地址的USB设备
-               dvdattach <span class="keyword">none</span>| 不连接虚拟DVD光驱
-                       <span class="variable">&lt;uuid&gt;</span>| 连接到指定UUID的DVD光驱
-                   <span class="variable">&lt;filename&gt;</span>| 连接到指定名称的DVD映像文件
-                  host:<span class="variable">&lt;drive&gt;</span> 连接到宿主机的DVD光驱
-               floppyattach <span class="keyword">none</span>| 不连接虚拟软驱
-                          <span class="variable">&lt;uuid&gt;</span>| 连接到指定UUID的虚拟软驱
-                      <span class="variable">&lt;filename&gt;</span>| 连接到指定名称的软盘映像文件
-                     host:<span class="variable">&lt;drive&gt;</span> 连接到宿主机的软驱
-               setvideomodehint <span class="variable">&lt;xres&gt;</span> 设置虚拟机的屏幕分辨率 水平像素
-                                <span class="variable">&lt;yres&gt;</span> 垂直像素
-                                 <span class="variable">&lt;bpp&gt;</span> 颜色深度
-                             [display] 刷新频率
-               setcredentials <span class="variable">&lt;username&gt;</span> 指定VRDP自动连接参数 用户名
-                              <span class="variable">&lt;password&gt;</span> 密码
-                                <span class="variable">&lt;domain&gt;</span> 域
-             [-allowlocallogon <span class="variable">&lt;yes|no&gt;</span>] 允许|禁止本地登陆
-VBoxManage discardstate     <span class="variable">&lt;uuid&gt;</span>|<span class="variable">&lt;name&gt;</span> 丢弃指定UUID|名称的虚拟机的保存状态
-VBoxManage adoptstate       <span class="variable">&lt;uuid&gt;</span>|<span class="variable">&lt;name&gt;</span> <span class="variable">&lt;state_file&gt;</span> 将虚拟机从指定的保存状态中恢复
-VBoxManage snapshot         <span class="variable">&lt;uuid&gt;</span>|<span class="variable">&lt;name&gt;</span> 为指定的虚拟机拍快照
-                            take <span class="variable">&lt;name&gt;</span> 为快照取名
-                        [-desc <span class="variable">&lt;desc&gt;</span>]| 给快照添加描述
-                        discard <span class="variable">&lt;uuid&gt;</span>|<span class="variable">&lt;name&gt;</span> | 丢弃指定的快照
-                        discardcurrent -state| 恢复到最近的快照
-                                        -all | 恢复到倒数第二个快照
-                        edit <span class="variable">&lt;uuid&gt;</span>|<span class="variable">&lt;name&gt;</span>| 编辑指定的快照
-                                   -current 编辑当前快照
-                          [-newname <span class="variable">&lt;name&gt;</span>] 修改快照名称
-                          [-newdesc <span class="variable">&lt;desc&gt;</span>] 修改快照描述
-                        showvminfo <span class="variable">&lt;uuid&gt;</span>|<span class="variable">&lt;name&gt;</span> 显示快照的虚拟机信息
-VBoxManage registerimage    disk|dvd|floppy <span class="variable">&lt;filename&gt;</span> 注册硬盘、光盘、软盘映像文件
-                            [-type normal| 注册为普通类型（可创建快照，可读写）
-                                immutable| 注册为只读类型（相当于加了硬盘卡）
-                             writethrough] 注册为可写类型（这种类型不能创建快照）
-                               (disk only) (注册类型选项只适用于硬盘）
-VBoxManage unregisterimage disk| 从虚拟介质管理器删除指定的硬盘
-                             dvd| 从虚拟介质管理器删除指定的DVD光盘
-                           floppy 从虚拟介质管理器删除指定的软盘
-                          <span class="variable">&lt;uuid&gt;</span>| 删除时指定UUID
-                       <span class="variable">&lt;filename&gt;</span> 删除时指定映像文件
-VBoxManage showvdiinfo      <span class="variable">&lt;uuid&gt;</span>|<span class="variable">&lt;filename&gt;</span> 显示指定UUID|名称虚拟硬盘的信息
-
-VBoxManage createvdi        -filename <span class="variable">&lt;filename&gt;</span> 创建指定名称的虚拟硬盘
-                            -size <span class="variable">&lt;megabytes&gt;</span> 指定虚拟硬盘的大小（以兆为单位）
-                            [-static] 创建固定大小的虚拟硬盘
-                            [-comment <span class="variable">&lt;comment&gt;</span>] 添加一段解释性文字
-                            [-register] 注册新创建的虚拟硬盘
-                            [-type normal| 注册类型 普通（可以创建快照）
-                             writethrough] 注册类型 可写（不能创建快照）
-                          (<span class="keyword">default</span>: normal) 默认是普通类型
-VBoxManage modifyvdi        <span class="variable">&lt;uuid&gt;</span>|<span class="variable">&lt;filename&gt;</span> compact 压缩指定的虚拟硬盘
-VBoxManage clonevdi         <span class="variable">&lt;uuid&gt;</span>|<span class="variable">&lt;filename&gt;</span> <span class="variable">&lt;outputfile&gt;</span> 克隆指定的VDI虚拟硬盘
-VBoxManage convertdd        [-static] <span class="variable">&lt;filename&gt;</span> <span class="variable">&lt;outputfile&gt;</span> 将raw硬盘转换成vdi虚拟硬盘
-VBoxManage convertdd        [-static] stdin <span class="variable">&lt;outputfile&gt;</span> <span class="variable">&lt;bytes&gt;</span> 将标准输入参数指定的设备转换成vdi虚拟硬盘，比如：dd if=/dev/sda1 | VBoxManage     convertdd stdin /media/disk/C.vdi <span class="number">62277025792</span>
 </code></pre>
       
     </div>
@@ -466,6 +404,10 @@ VBoxManage convertdd        [-static] stdin <span class="variable">&lt;outputfil
 
       
 
+      
+        <p class="article-more-link">
+          <a  href="/2015/07/26/linux下virtualbox命令/#more">more >></a>
+        </p>
       
       <div class="clearfix"></div>
     </div>
@@ -524,49 +466,7 @@ yum install nginx
 <span class="number">0</span>.<span class="variable">organizationName_default      =</span> Tech
 <span class="variable">organizationalUnitName          =</span> Organizational Unit Name (eg, section)
 <span class="variable">organizationalUnitName_default  =</span> Org
-</code></pre><p>确保以上字段在证书，服务端证书，客户端证书一致。</p>
-<h5 id="创建证书的私钥">创建证书的私钥</h5><pre><code>cd <span class="regexp">/etc/</span>pki<span class="regexp">/CA/</span><span class="keyword">private</span>
-umask <span class="number">077</span>
-openssl genrsa -out cakey.pem <span class="number">2048</span>
-</code></pre><h5 id="生成自签证书">生成自签证书</h5><pre><code>cd <span class="regexp">/etc/</span>pki<span class="regexp">/CA/</span>
-openssl req -<span class="keyword">new</span> -x509 -key <span class="keyword">private</span><span class="regexp">/cakey.pem -out cacert.pem -days 3655</span>
-</code></pre><h5 id="PS:填坑">PS:填坑</h5><pre><code>openssl ca -<span class="keyword">in</span> nginx.csr -out nginx.crt -days <span class="number">3650</span>
-Using configuration from <span class="regexp">/etc/</span>pki<span class="regexp">/tls/</span>openssl.cnf
-unable to load number from <span class="regexp">/etc/</span>pki<span class="regexp">/CA/</span>serial
-error <span class="keyword">while</span> loading serial number
-<span class="number">140311870949192</span>:<span class="string">error:</span><span class="number">0</span><span class="string">D066096:</span>asn1 encoding     <span class="string">routines:</span><span class="string">a2i_ASN1_INTEGER:</span><span class="typename">short</span> <span class="string">line:</span>f_int.<span class="string">c:</span><span class="number">215</span>:
-</code></pre><p>生成过程中遇到了该错误，用一下代码解决：</p>
-<pre><code><span class="keyword">cd</span> /etc/pki/<span class="keyword">CA</span>
-echo <span class="string">"00"</span> &gt;serial
-<span class="keyword">cat</span> serial
-</code></pre><h5 id="创建服务器证书">创建服务器证书</h5><pre><code><span class="attribute">mask</span> <span class="number">077</span>
-openssl genrsa -out nginx<span class="class">.key</span> <span class="number">1024</span>
-openssl req -new -key nginx<span class="class">.key</span> -out nginx<span class="class">.csr</span>
-openssl ca -<span class="keyword">in</span> nginx<span class="class">.csr</span> -out nginx<span class="class">.crt</span> -days <span class="number">3650</span>
-</code></pre><h5 id="创建客户端证书">创建客户端证书</h5><pre><code>umask <span class="number">077</span>
-openssl genrsa -out client<span class="class">.key</span> <span class="number">1024</span>
-openssl req -new -key client<span class="class">.key</span> -out client<span class="class">.csr</span>
-openssl ca -<span class="keyword">in</span> client<span class="class">.csr</span> -out client<span class="class">.crt</span> -days <span class="number">3650</span>
-</code></pre><h5 id="PS：填坑">PS：填坑</h5><pre><code>failed <span class="keyword">to</span> update database
-TXT_DB <span class="keyword">error</span> <span class="type">number</span> <span class="number">2</span>
-</code></pre><p>该错误是因为多次生成证书造成/etc/pki/CA/index.txt存在</p>
-<pre><code>rm -rf <span class="regexp">/etc/</span>pki<span class="regexp">/CA/i</span>ndex.txt
-touch <span class="regexp">/etc/</span>pki<span class="regexp">/CA/i</span>ndex.txt
-问题解决
-</code></pre><p>生成完成后进行证书类型转换</p>
-<pre><code>openssl pkcs12 -export -clcerts -<span class="keyword">in</span> client<span class="class">.crt</span> -inkey client<span class="class">.key</span> -out client.p12
-</code></pre><h5 id="配置nginx服务器验证">配置nginx服务器验证</h5><pre><code>ssl on;
-ssl_protocols <span class="constant">TLSv1</span> <span class="constant">TLSv1</span>.<span class="number">1</span> <span class="constant">TLSv1</span>.<span class="number">2</span>;
-ssl_verify_client on; <span class="comment">##双向认证</span>
-ssl_prefer_server_ciphers on;
-ssl_session_timeout <span class="number">5</span>m;
-ssl_session_cache <span class="symbol">builtin:</span><span class="number">1000</span> <span class="symbol">shared:</span><span class="constant">SSL</span><span class="symbol">:</span><span class="number">10</span>m;
-ssl_certificate      nginx.crt;
-ssl_certificate_key  nginx.key;
-ssl_client_certificate /etc/pki/<span class="constant">CA</span>/cacert.pem；
-ssl_ciphers <span class="constant">ECDHE</span>-<span class="constant">RSA</span>-<span class="constant">AES128</span>-<span class="constant">GCM</span>-<span class="constant">SHA256</span><span class="symbol">:ECDHE-ECDSA-AES128-GCM-SHA256</span><span class="symbol">:ECDHE-RSA-AES256-GCM-SHA384</span><span class="symbol">:ECDHE-ECDSA-AES256-GCM-SHA384</span><span class="symbol">:DHE-RSA-AES128-GCM-SHA256</span><span class="symbol">:DHE-DSS-AES128-GCM-SHA256</span><span class="symbol">:kEDH+AESGCM</span><span class="symbol">:ECDHE-RSA-AES128-SHA256</span><span class="symbol">:ECDHE-ECDSA-AES128-SHA256</span><span class="symbol">:ECDHE-RSA-AES128-SHA</span><span class="symbol">:ECDHE-ECDSA-AES128-SHA</span><span class="symbol">:ECDHE-RSA-AES256-SHA384</span><span class="symbol">:ECDHE-ECDSA-AES256-SHA384</span><span class="symbol">:ECDHE-RSA-AES256-SHA</span><span class="symbol">:ECDHE-ECDSA-AES256-SHA</span><span class="symbol">:DHE-RSA-AES128-SHA256</span><span class="symbol">:DHE-RSA-AES128-SHA</span><span class="symbol">:DHE-DSS-AES128-SHA256</span><span class="symbol">:DHE-RSA-AES256-SHA256</span><span class="symbol">:DHE-DSS-AES256-SHA</span><span class="symbol">:DHE-RSA-AES256-SHA</span><span class="symbol">:AES128-GCM-SHA256</span><span class="symbol">:AES256-GCM-SHA384</span><span class="symbol">:AES128-SHA256</span><span class="symbol">:AES256-SHA256</span><span class="symbol">:AES128-SHA</span><span class="symbol">:AES256-SHA</span><span class="symbol">:AES</span><span class="symbol">:CAMELLIA</span><span class="symbol">:DES-CBC3-SHA</span><span class="symbol">:</span>!<span class="symbol">aNULL:</span>!<span class="symbol">eNULL:</span>!<span class="constant">EXPORT</span><span class="symbol">:</span>!<span class="constant">DES</span><span class="symbol">:</span>!<span class="constant">RC4</span><span class="symbol">:</span>!<span class="constant">MD5</span><span class="symbol">:</span>!<span class="constant">PSK</span><span class="symbol">:</span>!<span class="symbol">aECDH:</span>!<span class="constant">EDH</span>-<span class="constant">DSS</span>-<span class="constant">DES</span>-<span class="constant">CBC3</span>-<span class="constant">SHA</span><span class="symbol">:</span>!<span class="constant">EDH</span>-<span class="constant">RSA</span>-<span class="constant">DES</span>-<span class="constant">CBC3</span>-<span class="constant">SHA</span><span class="symbol">:</span>!<span class="constant">KRB5</span>-<span class="constant">DES</span>-<span class="constant">CBC3</span>-<span class="constant">SHA</span>;
-</code></pre><h5 id="配置本地证书">配置本地证书</h5><pre><code><span class="keyword">client</span>.p12下载到本地导入即可。
-</code></pre>
+</code></pre><p>确保以上字段在证书，服务端证书，客户端证书一致。<br>
       
     </div>
     
@@ -579,6 +479,10 @@ ssl_ciphers <span class="constant">ECDHE</span>-<span class="constant">RSA</span
 
       
 
+      
+        <p class="article-more-link">
+          <a  href="/2015/07/10/nginx配置SSL双向认证/#more">more >></a>
+        </p>
       
       <div class="clearfix"></div>
     </div>
@@ -620,18 +524,12 @@ ssl_ciphers <span class="constant">ECDHE</span>-<span class="constant">RSA</span
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h5 id="mod_rpaf是apache的一个模块，目的是为了获取访客的真实IP，下面是安装方法">mod_rpaf是apache的一个模块，目的是为了获取访客的真实IP，下面是安装方法</h5><p><br></p>
-<h4 id="安装apache开发组件">安装apache开发组件</h4><pre><code>yum <span class="keyword">install</span> httpd-devel
+        <h5 id="mod_rpaf是apache的一个模块，目的是为了获取访客的真实IP，下面是安装方法">mod_rpaf是apache的一个模块，目的是为了获取访客的真实IP，下面是安装方法</h5><h4 id="安装apache开发组件">安装apache开发组件</h4><pre><code>yum <span class="keyword">install</span> httpd-devel
 </code></pre><h4 id="下载插件并编译安装">下载插件并编译安装</h4><pre><code>wget ftp:<span class="comment">//ftp.tr.debian.org/gentoo/distfiles/mod_rpaf-0.6.tar.gz</span>
 tar xvfz mod_rpaf-<span class="number">0.6</span><span class="class">.tar</span><span class="class">.gz</span>
 cd mod_rpaf-<span class="number">0.6</span>
 apxs -<span class="tag">i</span> -c -n mod_rpaf-<span class="number">2.0</span><span class="class">.so</span> mod_rpaf-<span class="number">2.0</span><span class="class">.c</span>
 chmod <span class="number">755</span> /usr/lib64/httpd/modules/mod_rpaf-<span class="number">2.0</span>.so
-</code></pre><h4 id="配置文件加载模块">配置文件加载模块</h4><pre><code><span class="keyword"><span class="common">LoadModule</span></span> rpaf_module modules/mod_rpaf-2.0.so
-</code></pre><h4 id="配置组件">配置组件</h4><pre><code><span class="tag">RPAFenable</span> <span class="tag">On</span>
-<span class="tag">RPAFsethostname</span> <span class="tag">On</span>
-<span class="tag">RPAFproxy_ips</span> 10<span class="class">.1</span><span class="class">.1</span><span class="class">.2</span> 127<span class="class">.0</span><span class="class">.0</span><span class="class">.1</span>
-<span class="tag">RPAFheader</span> <span class="tag">X-Forwarded-For</span>
 </code></pre>
       
     </div>
@@ -646,143 +544,8 @@ chmod <span class="number">755</span> /usr/lib64/httpd/modules/mod_rpaf-<span cl
       
 
       
-      <div class="clearfix"></div>
-    </div>
-    
-  </div>
-  
-</article>
-
-
-
-
-
-
-
-  
-    <article id="post-(转载)业务安全漏洞挖掘归纳总结" class="article article-type-post" itemscope itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a href="/2015/07/07/(转载)业务安全漏洞挖掘归纳总结/" class="article-date">
-  	<time datetime="2015-07-07T11:31:07.000Z" itemprop="datePublished">2015-07-07</time>
-</a>
-    </div>
-  
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2015/07/07/(转载)业务安全漏洞挖掘归纳总结/">(转载)业务安全漏洞挖掘归纳总结</a>
-    </h1>
-  
-
-      </header>
-      
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h3 id="0x00_索引说明">0x00 索引说明</h3><hr>
-<p>6.30在OWASP的分享，关于业务安全的漏洞检测模型。进一步的延伸科普。<br><img src="http://static.wooyun.org//drops/20150703/2015070302312847097.png" alt="001"><br><img src="http://static.wooyun.org//drops/20150703/2015070302312815571.png" alt="002"></p>
-<h3 id="0x01_身份认证安全">0x01 身份认证安全</h3><h5 id="1-暴力破解">1.暴力破解</h5><p>在没有验证码限制或者一次验证码可以多次使用的地方，使用已知用户对密码进行暴力破解或者用一个通用密码对用户进行暴力破解。 简单的验证码爆破。URL: <a href="http://zone.wooyun.org/content/20839">http://zone.wooyun.org/content/20839</a></p>
-<p>一些工具及脚本</p>
-<p>Burpsuite</p>
-<p>htpwdScan 撞库爆破必备 URL: <a href="https://github.com/lijiejie/htpwdScan">https://github.com/lijiejie/htpwdScan</a></p>
-<p>hydra 源码安装xhydra支持更多的协议去爆破 (可破WEB，其他协议不属于业务安全的范畴)<br>
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/safe/">safe</a></li></ul>
-	</div>
-
-      
-
-      
         <p class="article-more-link">
-          <a  href="/2015/07/07/(转载)业务安全漏洞挖掘归纳总结/#more">more >></a>
-        </p>
-      
-      <div class="clearfix"></div>
-    </div>
-    
-  </div>
-  
-</article>
-
-
-
-
-
-
-
-  
-    <article id="post-(转载)MariaDB Galera Cluster 部署" class="article article-type-post" itemscope itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a href="/2015/07/07/(转载)MariaDB Galera Cluster 部署/" class="article-date">
-  	<time datetime="2015-07-06T23:07:07.000Z" itemprop="datePublished">2015-07-07</time>
-</a>
-    </div>
-  
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2015/07/07/(转载)MariaDB Galera Cluster 部署/">(转载)MariaDB Galera Cluster 部署（如何快速部署 MariaDB 集群）</a>
-    </h1>
-  
-
-      </header>
-      
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>MariaDB作为Mysql的一个分支，在开源项目中已经广泛使用，例如大热的openstack，所以，为了保证服务的高可用性，同时提高系统的负载能力，集群部署是必不可少的。</p>
-<h4 id="MariaDB_Galera_Cluster_介绍">MariaDB Galera Cluster 介绍</h4><hr>
-<p>MariaDB集群是MariaDB同步多主机集群。它仅支持XtraDB/ InnoDB存储引擎（虽然有对MyISAM实验支持 - 看wsrep_replicate_myisam系统变量）。</p>
-<h4 id="主要功能:">主要功能:</h4><ul>
-<li>同步复制</li>
-<li>真正的multi-master，即所有节点可以同时读写数据库</li>
-<li>自动的节点成员控制，失效节点自动被清除</li>
-<li>新节点加入数据自动复制</li>
-<li>真正的并行复制，行级</li>
-<li>用户可以直接连接集群，使用感受上与MySQL完全一致</li>
-</ul>
-<h4 id="优势：">优势：</h4><ul>
-<li>因为是多主，所以不存在Slavelag(延迟)</li>
-<li>不存在丢失事务的情况</li>
-<li>同时具有读和写的扩展能力</li>
-<li>更小的客户端延迟</li>
-<li>节点间数据是同步的,而Master/Slave模式是异步的,不同slave上的binlog可能是不同的</li>
-</ul>
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/DB/">DB</a></li></ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a  href="/2015/07/07/(转载)MariaDB Galera Cluster 部署/#more">more >></a>
+          <a  href="/2015/07/09/Apache下mod_rpaf模块安装/#more">more >></a>
         </p>
       
       <div class="clearfix"></div>
@@ -805,7 +568,7 @@ chmod <span class="number">755</span> /usr/lib64/httpd/modules/mod_rpaf-<span cl
   <div class="outer">
     <div id="footer-info">
     	<div class="footer-left">
-    		&copy; 2016 Amour
+    		&copy; 2017 Amour
     	</div>
       	<div class="footer-right">
       		<a href="http://hexo.io/" target="_blank">Hexo</a>  Theme <a href="https://github.com/litten/hexo-theme-yilia" target="_blank">Yilia</a> by Litten

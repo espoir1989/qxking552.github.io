@@ -3,32 +3,32 @@
 <head>
   <meta charset="utf-8">
   
-  <title>Apache下mod_rpaf模块安装 | 云运维</title>
+  <title>Apache下mod_rpaf模块安装 | 运维小站</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="mod_rpaf是apache的一个模块，目的是为了获取访客的真实IP，下面是安装方法
-安装apache开发组件yum install httpd-devel
+  <meta name="description" content="mod_rpaf是apache的一个模块，目的是为了获取访客的真实IP，下面是安装方法安装apache开发组件yum install httpd-devel
 下载插件并编译安装wget ftp://ftp.tr.debian.org/gentoo/distfiles/mod_rpaf-0.6.tar.gz
 tar xvfz mod_rpaf-0.6.tar.gz
-cd mod_rpaf-0.6">
+cd mod_rpaf-0.6
+a">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Apache下mod_rpaf模块安装">
 <meta property="og:url" content="http://yunops.top/2015/07/09/Apache下mod_rpaf模块安装/index.html">
-<meta property="og:site_name" content="云运维">
-<meta property="og:description" content="mod_rpaf是apache的一个模块，目的是为了获取访客的真实IP，下面是安装方法
-安装apache开发组件yum install httpd-devel
+<meta property="og:site_name" content="运维小站">
+<meta property="og:description" content="mod_rpaf是apache的一个模块，目的是为了获取访客的真实IP，下面是安装方法安装apache开发组件yum install httpd-devel
 下载插件并编译安装wget ftp://ftp.tr.debian.org/gentoo/distfiles/mod_rpaf-0.6.tar.gz
 tar xvfz mod_rpaf-0.6.tar.gz
-cd mod_rpaf-0.6">
-<meta property="og:updated_time" content="2015-07-09T14:39:43.000Z">
+cd mod_rpaf-0.6
+a">
+<meta property="og:updated_time" content="2017-04-27T08:45:31.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Apache下mod_rpaf模块安装">
-<meta name="twitter:description" content="mod_rpaf是apache的一个模块，目的是为了获取访客的真实IP，下面是安装方法
-安装apache开发组件yum install httpd-devel
+<meta name="twitter:description" content="mod_rpaf是apache的一个模块，目的是为了获取访客的真实IP，下面是安装方法安装apache开发组件yum install httpd-devel
 下载插件并编译安装wget ftp://ftp.tr.debian.org/gentoo/distfiles/mod_rpaf-0.6.tar.gz
 tar xvfz mod_rpaf-0.6.tar.gz
-cd mod_rpaf-0.6">
+cd mod_rpaf-0.6
+a">
   
-    <link rel="alternative" href="/atom.xml" title="云运维" type="application/atom+xml">
+    <link rel="alternative" href="/atom.xml" title="运维小站" type="application/atom+xml">
   
   
     <link rel="icon" href="/favicon.png">
@@ -129,7 +129,7 @@ cd mod_rpaf-0.6">
 				
 				<section class="switch-part switch-part2">
 					<div class="widget tagcloud" id="js-tagcloud">
-						<a href="/tags/DB/" style="font-size: 10px;">DB</a> <a href="/tags/OPS/" style="font-size: 20px;">OPS</a> <a href="/tags/safe/" style="font-size: 10px;">safe</a>
+						<a href="/tags/OPS/" style="font-size: 10px;">OPS</a>
 					</div>
 				</section>
 				
@@ -238,14 +238,14 @@ cd mod_rpaf-0.6">
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h5 id="mod_rpaf是apache的一个模块，目的是为了获取访客的真实IP，下面是安装方法">mod_rpaf是apache的一个模块，目的是为了获取访客的真实IP，下面是安装方法</h5><p><br></p>
-<h4 id="安装apache开发组件">安装apache开发组件</h4><pre><code>yum <span class="keyword">install</span> httpd-devel
+        <h5 id="mod_rpaf是apache的一个模块，目的是为了获取访客的真实IP，下面是安装方法">mod_rpaf是apache的一个模块，目的是为了获取访客的真实IP，下面是安装方法</h5><h4 id="安装apache开发组件">安装apache开发组件</h4><pre><code>yum <span class="keyword">install</span> httpd-devel
 </code></pre><h4 id="下载插件并编译安装">下载插件并编译安装</h4><pre><code>wget ftp:<span class="comment">//ftp.tr.debian.org/gentoo/distfiles/mod_rpaf-0.6.tar.gz</span>
 tar xvfz mod_rpaf-<span class="number">0.6</span><span class="class">.tar</span><span class="class">.gz</span>
 cd mod_rpaf-<span class="number">0.6</span>
 apxs -<span class="tag">i</span> -c -n mod_rpaf-<span class="number">2.0</span><span class="class">.so</span> mod_rpaf-<span class="number">2.0</span><span class="class">.c</span>
 chmod <span class="number">755</span> /usr/lib64/httpd/modules/mod_rpaf-<span class="number">2.0</span>.so
-</code></pre><h4 id="配置文件加载模块">配置文件加载模块</h4><pre><code><span class="keyword"><span class="common">LoadModule</span></span> rpaf_module modules/mod_rpaf-2.0.so
+</code></pre><a id="more"></a>
+<h4 id="配置文件加载模块">配置文件加载模块</h4><pre><code><span class="keyword"><span class="common">LoadModule</span></span> rpaf_module modules/mod_rpaf-2.0.so
 </code></pre><h4 id="配置组件">配置组件</h4><pre><code><span class="tag">RPAFenable</span> <span class="tag">On</span>
 <span class="tag">RPAFsethostname</span> <span class="tag">On</span>
 <span class="tag">RPAFproxy_ips</span> 10<span class="class">.1</span><span class="class">.1</span><span class="class">.2</span> 127<span class="class">.0</span><span class="class">.0</span><span class="class">.1</span>
@@ -268,11 +268,6 @@ chmod <span class="number">755</span> /usr/lib64/httpd/modules/mod_rpaf-<span cl
       </div>
     </a>
   
-  
-    <a href="/2015/07/07/(转载)业务安全漏洞挖掘归纳总结/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">(转载)业务安全漏洞挖掘归纳总结</div>
-      <strong class="article-nav-caption">></strong>
-    </a>
   
 </nav>
 
@@ -324,7 +319,7 @@ chmod <span class="number">755</span> /usr/lib64/httpd/modules/mod_rpaf-<span cl
   <div class="outer">
     <div id="footer-info">
     	<div class="footer-left">
-    		&copy; 2016 Amour
+    		&copy; 2017 Amour
     	</div>
       	<div class="footer-right">
       		<a href="http://hexo.io/" target="_blank">Hexo</a>  Theme <a href="https://github.com/litten/hexo-theme-yilia" target="_blank">Yilia</a> by Litten

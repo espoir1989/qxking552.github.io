@@ -3,18 +3,18 @@
 <head>
   <meta charset="utf-8">
   
-  <title>beanstalkd性能监控脚本 | 运维小站</title>
+  <title>Nginx + Lua + Redis 实现灰度发布 | 运维小站</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="12345678910111213141516171819#!/bin/bashHOST=ipPORT=11300function urgent &amp;#123;echo -e &amp;quot;stats\r&amp;quot; | nc $HOST $PORT | grep &amp;apos;current-jobs-urgent&amp;apos; | grep -E -o &amp;quot;[0-9]+&amp;quot;&amp;#125;">
+  <meta name="description" content="本方法可以实现根据用户id判断，是否分发到灰度环境proxy_a,proxy_b根据实际需求调整lua代码123456789101112131415161718192021222324252627282930313233--[[amour]]----[[引入redis模块]]--local redis = require &quot;resty.redis&quot;--[[获取cookie为uid的浏览器数据]]-">
 <meta property="og:type" content="article">
-<meta property="og:title" content="beanstalkd性能监控脚本">
-<meta property="og:url" content="http://yunops.top/2016/07/04/beanstalkd性能监控脚本/index.html">
+<meta property="og:title" content="Nginx + Lua + Redis 实现灰度发布">
+<meta property="og:url" content="http://yunops.top/2017/03/01/Nginx + Lua + Redis 实现灰度发布/index.html">
 <meta property="og:site_name" content="运维小站">
-<meta property="og:description" content="12345678910111213141516171819#!/bin/bashHOST=ipPORT=11300function urgent &amp;#123;echo -e &amp;quot;stats\r&amp;quot; | nc $HOST $PORT | grep &amp;apos;current-jobs-urgent&amp;apos; | grep -E -o &amp;quot;[0-9]+&amp;quot;&amp;#125;">
-<meta property="og:updated_time" content="2017-04-27T08:45:39.000Z">
+<meta property="og:description" content="本方法可以实现根据用户id判断，是否分发到灰度环境proxy_a,proxy_b根据实际需求调整lua代码123456789101112131415161718192021222324252627282930313233--[[amour]]----[[引入redis模块]]--local redis = require &quot;resty.redis&quot;--[[获取cookie为uid的浏览器数据]]-">
+<meta property="og:updated_time" content="2017-04-27T08:53:41.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="beanstalkd性能监控脚本">
-<meta name="twitter:description" content="12345678910111213141516171819#!/bin/bashHOST=ipPORT=11300function urgent &amp;#123;echo -e &amp;quot;stats\r&amp;quot; | nc $HOST $PORT | grep &amp;apos;current-jobs-urgent&amp;apos; | grep -E -o &amp;quot;[0-9]+&amp;quot;&amp;#125;">
+<meta name="twitter:title" content="Nginx + Lua + Redis 实现灰度发布">
+<meta name="twitter:description" content="本方法可以实现根据用户id判断，是否分发到灰度环境proxy_a,proxy_b根据实际需求调整lua代码123456789101112131415161718192021222324252627282930313233--[[amour]]----[[引入redis模块]]--local redis = require &quot;resty.redis&quot;--[[获取cookie为uid的浏览器数据]]-">
   
     <link rel="alternative" href="/atom.xml" title="运维小站" type="application/atom+xml">
   
@@ -189,11 +189,11 @@
 		</header>				
 	</div>
 </nav>
-      <div class="body-wrap"><article id="post-beanstalkd性能监控脚本" class="article article-type-post" itemscope itemprop="blogPost">
+      <div class="body-wrap"><article id="post-Nginx + Lua + Redis 实现灰度发布" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
-      <a href="/2016/07/04/beanstalkd性能监控脚本/" class="article-date">
-  	<time datetime="2016-07-04T14:27:24.000Z" itemprop="datePublished">2016-07-04</time>
+      <a href="/2017/03/01/Nginx + Lua + Redis 实现灰度发布/" class="article-date">
+  	<time datetime="2017-03-01T10:50:00.000Z" itemprop="datePublished">2017-03-01</time>
 </a>
     </div>
   
@@ -206,7 +206,7 @@
         
   
     <h1 class="article-title" itemprop="name">
-      beanstalkd性能监控脚本
+      Nginx + Lua + Redis 实现灰度发布
     </h1>
   
 
@@ -226,7 +226,17 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div></pre></td><td class="code"><pre><div class="line">#!/bin/bash</div><div class="line">HOST=ip</div><div class="line">PORT=11300</div><div class="line">function urgent &#123;</div><div class="line">echo -e &quot;stats\r&quot; | nc $HOST $PORT | grep &apos;current-jobs-urgent&apos; | grep -E -o &quot;[0-9]+&quot;</div><div class="line">&#125;</div><div class="line">function ready &#123;</div><div class="line">echo -e &quot;stats\r&quot; | nc $HOST $PORT | grep &apos;current-jobs-ready&apos; | grep -E -o &quot;[0-9]+&quot;</div><div class="line">&#125;</div><div class="line">function reserved &#123;</div><div class="line">echo -e &quot;stats\r&quot; | nc $HOST $PORT | grep &apos;current-jobs-reserved&apos; | grep -E -o &quot;[0-9]+&quot;</div><div class="line">&#125;</div><div class="line">function delayed &#123;</div><div class="line">echo -e &quot;stats\r&quot; | nc $HOST $PORT | grep &apos;current-jobs-delayed&apos; | grep -E -o &quot;[0-9]+&quot;</div><div class="line">&#125;</div><div class="line">function buried &#123;</div><div class="line">echo -e &quot;stats\r&quot; | nc $HOST $PORT | grep &apos;current-jobs-buried&apos; | grep -E -o &quot;[0-9]+&quot;</div><div class="line">&#125;</div><div class="line">$1</div></pre></td></tr></table></figure>
+        <h5 id="本方法可以实现根据用户id判断，是否分发到灰度环境">本方法可以实现根据用户id判断，是否分发到灰度环境</h5><h5 id="proxy_a,proxy_b根据实际需求调整">proxy_a,proxy_b根据实际需求调整</h5><h4 id="lua代码">lua代码</h4><figure class="highlight lua"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div></pre></td><td class="code"><pre><div class="line"><span class="comment">--[[amour]]</span><span class="comment">--</span></div><div class="line"><span class="comment">--[[引入redis模块]]</span><span class="comment">--</span></div><div class="line"><span class="keyword">local</span> redis = <span class="built_in">require</span> <span class="string">"resty.redis"</span></div><div class="line"></div><div class="line"><span class="comment">--[[获取cookie为uid的浏览器数据]]</span><span class="comment">--</span></div><div class="line"><span class="keyword">local</span> uid, err = ngx.var.cookie_uid</div><div class="line"><span class="keyword">if</span> <span class="keyword">not</span> uid <span class="keyword">then</span></div><div class="line">	ngx.exec(<span class="string">"@proxy_b"</span>)</div><div class="line">	ngx.log(ngx.ERR, err)</div><div class="line"><span class="keyword">end</span></div><div class="line"></div><div class="line"><span class="comment">--[[链接redis获取数据]]</span><span class="comment">--</span></div><div class="line">redis:set_timeout(<span class="number">1000</span>)</div><div class="line"><span class="keyword">local</span> cache, err= redis.new()</div><div class="line">cache.connect(cache, <span class="string">'ip'</span>, <span class="string">'6379'</span>)</div><div class="line"><span class="keyword">if</span> <span class="keyword">not</span> cache <span class="keyword">then</span></div><div class="line">	ngx.exec(<span class="string">"@proxy_b"</span>)</div><div class="line">	ngx.log(ngx.ERR, err)</div><div class="line"><span class="keyword">end</span></div><div class="line"></div><div class="line"><span class="comment">--[[校对数据]]</span><span class="comment">--</span></div><div class="line"><span class="keyword">local</span> res, err = cache:get(<span class="string">"uid"</span>)</div><div class="line"><span class="keyword">if</span> <span class="keyword">not</span> res <span class="keyword">then</span></div><div class="line">	ngx.exec(<span class="string">"@proxy_b"</span>)</div><div class="line">	ngx.log(ngx.ERR, err)</div><div class="line"><span class="keyword">end</span></div><div class="line"></div><div class="line"><span class="keyword">local</span> regex = uid</div><div class="line"><span class="keyword">local</span> m = ngx.re.match(res, regex)</div><div class="line"><span class="keyword">if</span> m <span class="keyword">then</span></div><div class="line">	ngx.exec(<span class="string">"@proxy_a"</span>)</div><div class="line">	<span class="keyword">else</span> ngx.exec(<span class="string">"@proxy_b"</span>)</div><div class="line"><span class="keyword">end</span></div></pre></td></tr></table></figure>
+<h4 id="nginx_配置">nginx 配置</h4><h5 id="配置分发信息">配置分发信息</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">upstream proxy_a &#123;</div><div class="line">    server xxx.xxx.xxx.xxx:port;</div><div class="line">&#125;</div><div class="line"></div><div class="line">upstream proxy_b &#123;</div><div class="line">    server xxx.xxx.xxx.xxx:port;</div><div class="line">&#125;</div><div class="line">#####网站配置</div></pre></td></tr></table></figure>
+<pre><code><span class="tag">location</span> <span class="at_rule">@<span class="keyword">proxy_a</span> </span>{
+        <span class="tag">proxy_pass</span> <span class="rule"><span class="attribute">http</span>:<span class="value">//proxy_a</span></span>;
+}
+
+<span class="tag">location</span> <span class="at_rule">@<span class="keyword">proxy_b</span> </span>{
+        <span class="tag">proxy_pass</span> <span class="rule"><span class="attribute">http</span>:<span class="value">//proxy_b</span></span>;
+}
+</code></pre><p>```</p>
+
       
     </div>
     
@@ -235,18 +245,9 @@
     
 <nav id="article-nav">
   
-    <a href="/2017/03/01/Nginx + Lua + Redis 实现灰度发布/" id="article-nav-newer" class="article-nav-link-wrap">
-      <strong class="article-nav-caption"><</strong>
-      <div class="article-nav-title">
-        
-          Nginx + Lua + Redis 实现灰度发布
-        
-      </div>
-    </a>
   
-  
-    <a href="/2016/05/01/phantomjs安装教程/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">phantomjs安装</div>
+    <a href="/2016/07/04/beanstalkd性能监控脚本/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">beanstalkd性能监控脚本</div>
       <strong class="article-nav-caption">></strong>
     </a>
   
@@ -275,7 +276,7 @@
 
 <div class="duoshuo">
 	<!-- 多说评论框 start -->
-	<div class="ds-thread" data-thread-key="beanstalkd性能监控脚本" data-title="beanstalkd性能监控脚本" data-url="http://yunops.top/2016/07/04/beanstalkd性能监控脚本/"></div>
+	<div class="ds-thread" data-thread-key="Nginx + Lua + Redis 实现灰度发布" data-title="Nginx + Lua + Redis 实现灰度发布" data-url="http://yunops.top/2017/03/01/Nginx + Lua + Redis 实现灰度发布/"></div>
 	<!-- 多说评论框 end -->
 	<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
 	<script type="text/javascript">
