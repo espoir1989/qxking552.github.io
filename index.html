@@ -113,7 +113,7 @@
 				
 				<section class="switch-part switch-part2">
 					<div class="widget tagcloud" id="js-tagcloud">
-						<a href="/tags/OPS/" style="font-size: 10px;">OPS</a>
+						<a href="/tags/DB/" style="font-size: 10px;">DB</a> <a href="/tags/MAC/" style="font-size: 10px;">MAC</a> <a href="/tags/OPS/" style="font-size: 20px;">OPS</a>
 					</div>
 				</section>
 				
@@ -187,6 +187,117 @@
 </nav>
       <div class="body-wrap">
   
+    <article id="post-php7.1.6-centos安装脚本" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2017/07/01/php7.1.6-centos安装脚本/" class="article-date">
+  	<time datetime="2017-07-01T06:22:21.000Z" itemprop="datePublished">2017-07-01</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/07/01/php7.1.6-centos安装脚本/">php7.1.6-centos安装脚本</a>
+    </h1>
+  
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h5 id="操作系统">操作系统</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">system:centos 6.8</div></pre></td></tr></table></figure>
+<h5 id="安装过程">安装过程</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div></pre></td><td class="code"><pre><div class="line">cat &gt; /etc/yum.repos.d/epel.repo &lt;&lt;EOF</div><div class="line">[epel]</div><div class="line">name=Extra Packages for Enterprise Linux 6 - $basearch</div><div class="line">baseurl=http://centos.ustc.edu.cn/epel/6/$basearch</div><div class="line">#mirrorlist=https://mirrors.fedoraproject.org/metalink?repo=epel-6&amp;arch=$basearch</div><div class="line">failovermethod=priority</div><div class="line">enabled=1</div><div class="line">gpgcheck=1</div><div class="line">gpgkey=file:///etc/pki/rpm-gpg/RPM-GPG-KEY-EPEL-6</div><div class="line">[epel-debuginfo]</div><div class="line">name=Extra Packages for Enterprise Linux 6 - $basearch - Debug</div><div class="line">baseurl=http://centos.ustc.edu.cn/epel/6/$basearch/debug</div><div class="line">#mirrorlist=https://mirrors.fedoraproject.org/metalink?repo=epel-debug-6&amp;arch=$basearch</div><div class="line">failovermethod=priority</div><div class="line">enabled=0</div><div class="line">gpgkey=file:///etc/pki/rpm-gpg/RPM-GPG-KEY-EPEL-6</div><div class="line">gpgcheck=1</div><div class="line">[epel-source]</div><div class="line">name=Extra Packages for Enterprise Linux 6 - $basearch - Source</div><div class="line">baseurl=http://centos.ustc.edu.cn/epel/6/SRPMS</div><div class="line">#mirrorlist=https://mirrors.fedoraproject.org/metalink?repo=epel-source-6&amp;arch=$basearch</div><div class="line">failovermethod=priority</div><div class="line">enabled=0</div><div class="line">gpgkey=file:///etc/pki/rpm-gpg/RPM-GPG-KEY-EPEL-6</div><div class="line">gpgcheck=1</div><div class="line">EOF</div></pre></td></tr></table></figure>
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/OPS/">OPS</a></li></ul>
+	</div>
+
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+
+  
+    <article id="post-mac ramdisk" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2017/06/18/mac ramdisk/" class="article-date">
+  	<time datetime="2017-06-18T02:32:21.000Z" itemprop="datePublished">2017-06-18</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/06/18/mac ramdisk/">mac ramdisk</a>
+    </h1>
+  
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h5 id="操作系统">操作系统</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">MacOS Sierra 10.12.5</div></pre></td></tr></table></figure>
+<h5 id="创建过程">创建过程</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">diskutil erasevolume HFS+ RamDisk `hdiutil attach -nomount ram://2097152`</div><div class="line">mkdir -p /Volumes/Ramdisk/Library/Developer/Xcode/DerivedData</div><div class="line">mkdir -p /Volumes/Ramdisk/Library/Caches/Google</div><div class="line">mkdir -p /Volumes/Ramdisk/Library/Caches/com.apple.Safari/fsCachedData</div><div class="line">rm -rf ~/Library/Caches/Google</div><div class="line">rm -rf ~/Library/Caches/com.apple.Safari</div><div class="line">rm -rf ~/Library/Developer/Xcode/DerivedData</div><div class="line">ln -s /Volumes/Ramdisk/Library/Caches/Google ~/Library/Caches/Google</div><div class="line">ln -s /Volumes/Ramdisk/Library/Caches/com.apple.Safari ~/Library/Caches/com.apple.Safari</div><div class="line">ln -s /Volumes/Ramdisk/Library/Developer/Xcode/ ~/Library/Developer/Xcode/DerivedData</div></pre></td></tr></table></figure>
+<h5 id="备注">备注</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">ram://2097152 创建空间的大小，基本上做缓存的话1G足矣</div><div class="line">目录的问题，根据自己的需求去调整</div></pre></td></tr></table></figure>
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/MAC/">MAC</a></li></ul>
+	</div>
+
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+
+  
     <article id="post-Nginx + Lua + Redis 实现灰度发布" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
@@ -214,16 +325,8 @@
     <div class="article-entry" itemprop="articleBody">
       
         <h5 id="本方法可以实现根据用户id判断，是否分发到灰度环境">本方法可以实现根据用户id判断，是否分发到灰度环境</h5><h5 id="proxy_a,proxy_b根据实际需求调整">proxy_a,proxy_b根据实际需求调整</h5><h4 id="lua代码">lua代码</h4><figure class="highlight lua"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div></pre></td><td class="code"><pre><div class="line"><span class="comment">--[[amour]]</span><span class="comment">--</span></div><div class="line"><span class="comment">--[[引入redis模块]]</span><span class="comment">--</span></div><div class="line"><span class="keyword">local</span> redis = <span class="built_in">require</span> <span class="string">"resty.redis"</span></div><div class="line"></div><div class="line"><span class="comment">--[[获取cookie为uid的浏览器数据]]</span><span class="comment">--</span></div><div class="line"><span class="keyword">local</span> uid, err = ngx.var.cookie_uid</div><div class="line"><span class="keyword">if</span> <span class="keyword">not</span> uid <span class="keyword">then</span></div><div class="line">	ngx.exec(<span class="string">"@proxy_b"</span>)</div><div class="line">	ngx.log(ngx.ERR, err)</div><div class="line"><span class="keyword">end</span></div><div class="line"></div><div class="line"><span class="comment">--[[链接redis获取数据]]</span><span class="comment">--</span></div><div class="line">redis:set_timeout(<span class="number">1000</span>)</div><div class="line"><span class="keyword">local</span> cache, err= redis.new()</div><div class="line">cache.connect(cache, <span class="string">'ip'</span>, <span class="string">'6379'</span>)</div><div class="line"><span class="keyword">if</span> <span class="keyword">not</span> cache <span class="keyword">then</span></div><div class="line">	ngx.exec(<span class="string">"@proxy_b"</span>)</div><div class="line">	ngx.log(ngx.ERR, err)</div><div class="line"><span class="keyword">end</span></div><div class="line"></div><div class="line"><span class="comment">--[[校对数据]]</span><span class="comment">--</span></div><div class="line"><span class="keyword">local</span> res, err = cache:get(<span class="string">"uid"</span>)</div><div class="line"><span class="keyword">if</span> <span class="keyword">not</span> res <span class="keyword">then</span></div><div class="line">	ngx.exec(<span class="string">"@proxy_b"</span>)</div><div class="line">	ngx.log(ngx.ERR, err)</div><div class="line"><span class="keyword">end</span></div><div class="line"></div><div class="line"><span class="keyword">local</span> regex = uid</div><div class="line"><span class="keyword">local</span> m = ngx.re.match(res, regex)</div><div class="line"><span class="keyword">if</span> m <span class="keyword">then</span></div><div class="line">	ngx.exec(<span class="string">"@proxy_a"</span>)</div><div class="line">	<span class="keyword">else</span> ngx.exec(<span class="string">"@proxy_b"</span>)</div><div class="line"><span class="keyword">end</span></div></pre></td></tr></table></figure>
-<h4 id="nginx_配置">nginx 配置</h4><h5 id="配置分发信息">配置分发信息</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">upstream proxy_a &#123;</div><div class="line">    server xxx.xxx.xxx.xxx:port;</div><div class="line">&#125;</div><div class="line"></div><div class="line">upstream proxy_b &#123;</div><div class="line">    server xxx.xxx.xxx.xxx:port;</div><div class="line">&#125;</div><div class="line">#####网站配置</div></pre></td></tr></table></figure>
-<pre><code><span class="tag">location</span> <span class="at_rule">@<span class="keyword">proxy_a</span> </span>{
-        <span class="tag">proxy_pass</span> <span class="rule"><span class="attribute">http</span>:<span class="value">//proxy_a</span></span>;
-}
-
-<span class="tag">location</span> <span class="at_rule">@<span class="keyword">proxy_b</span> </span>{
-        <span class="tag">proxy_pass</span> <span class="rule"><span class="attribute">http</span>:<span class="value">//proxy_b</span></span>;
-}
-</code></pre><p>```</p>
-
+<h4 id="nginx_配置">nginx 配置</h4><h5 id="配置分发信息">配置分发信息</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">upstream proxy_a &#123;</div><div class="line">    server xxx.xxx.xxx.xxx:port;</div><div class="line">&#125;</div><div class="line"></div><div class="line">upstream proxy_b &#123;</div><div class="line">    server xxx.xxx.xxx.xxx:port;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h5 id="网站配置">网站配置</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">location @proxy_a &#123;</div><div class="line">        proxy_pass http://proxy_a;</div><div class="line">&#125;</div><div class="line"></div><div class="line">location @proxy_b &#123;</div><div class="line">        proxy_pass http://proxy_b;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
       
     </div>
     
@@ -232,6 +335,118 @@
       
 	<div class="article-tag tagcloud">
 		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/OPS/">OPS</a></li></ul>
+	</div>
+
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+
+  
+    <article id="post-nginx-http2-安装脚本" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2017/02/04/nginx-http2-安装脚本/" class="article-date">
+  	<time datetime="2017-02-04T02:22:21.000Z" itemprop="datePublished">2017-02-04</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/02/04/nginx-http2-安装脚本/">nginx-http2-安装脚本</a>
+    </h1>
+  
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h5 id="准备工作">准备工作</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">rpm -ivh http://nginx.org/packages/centos/6/noarch/RPMS/nginx-release-centos-6-0.el6.ngx.noarch.rpm</div><div class="line">yum install nginx pecl pecl-devel -y</div></pre></td></tr></table></figure>
+<h5 id="openssl-1-0-2k安装">openssl-1.0.2k安装</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line">yum install zlib* gcc make</div><div class="line">wget https://www.openssl.org/source/openssl-1.0.2k.tar.gz</div><div class="line">tar zxf openssl-1.0.2k.tar.gz</div><div class="line">cd openssl-1.0.2k</div><div class="line">./config shared zlib</div><div class="line">make</div><div class="line">make install</div><div class="line">rm -rf /usr/bin/openssl</div><div class="line">rm -rf /usr/include/openssl</div><div class="line">ln -s /usr/local/ssl/bin/openssl /usr/bin/openssl</div><div class="line">ln -s /usr/local/ssl/include/openssl /usr/include/openssl</div><div class="line">echo “/usr/local/ssl/lib” &gt;&gt; /etc/ld.so.conf</div><div class="line">ldconfig -v</div></pre></td></tr></table></figure>
+<h5 id="nginx编译安装">nginx编译安装</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">wget http://nginx.org/download/nginx-1.12.0.tar.gz</div><div class="line">tar zxvf nginx-1.12.0.tar.gz</div><div class="line">cd nginx-1.12.0</div><div class="line">./configure --prefix=/etc/nginx --sbin-path=/usr/sbin/nginx --modules-path=/usr/lib64/nginx/modules --conf-path=/etc/nginx/nginx.conf --error-log-path=/var/log/nginx/error.log --http-log-path=/var/log/nginx/access.log --pid-path=/var/run/nginx.pid --lock-path=/var/run/nginx.lock --http-client-body-temp-path=/var/cache/nginx/client_temp --http-proxy-temp-path=/var/cache/nginx/proxy_temp --http-fastcgi-temp-path=/var/cache/nginx/fastcgi_temp --http-uwsgi-temp-path=/var/cache/nginx/uwsgi_temp --http-scgi-temp-path=/var/cache/nginx/scgi_temp --user=nginx --group=nginx --with-compat --with-file-aio --with-threads --with-http_addition_module --with-http_auth_request_module --with-http_dav_module --with-http_flv_module --with-http_gunzip_module --with-http_gzip_static_module --with-http_mp4_module --with-http_random_index_module --with-http_realip_module --with-http_secure_link_module --with-http_slice_module --with-http_ssl_module --with-http_stub_status_module --with-http_sub_module --with-http_v2_module --with-mail --with-mail_ssl_module --with-stream --with-stream_realip_module --with-stream_ssl_module --with-stream_ssl_preread_module --with-cc-opt=&apos;-O2 -g -pipe -Wall -Wp,-D_FORTIFY_SOURCE=2 -fexceptions -fstack-protector --param=ssp-buffer-size=4 -m64 -mtune=generic -fPIC&apos; --with-ld-opt=&apos;-Wl,-z,relro -Wl,-z,now -pie&apos; --with-openssl=/opt/down/openssl-1.0.2h/ --with-cc-opt=-m64 --with-ld-opt=-m64</div><div class="line">make</div><div class="line">make install</div></pre></td></tr></table></figure>
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/OPS/">OPS</a></li></ul>
+	</div>
+
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+
+  
+    <article id="post-MySQL数据字典生成" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2016/12/22/MySQL数据字典生成/" class="article-date">
+  	<time datetime="2016-12-22T14:20:21.000Z" itemprop="datePublished">2016-12-22</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2016/12/22/MySQL数据字典生成/">MySQL数据字典生成</a>
+    </h1>
+  
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h5 id="操作系统">操作系统</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">system:centos 6.8</div><div class="line">mysql:mysql 5.7.11</div></pre></td></tr></table></figure>
+<h5 id="实现过程">实现过程</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div></pre></td><td class="code"><pre><div class="line">select distinct a.TABLE_SCHEMA as &apos;数据库&apos; ,</div><div class="line">a.TABLE_NAME as &apos;表名&apos;,</div><div class="line">a.COLUMN_NAME as &apos;字段名&apos;,</div><div class="line">a.COLUMN_TYPE as &apos;类型长度&apos;,</div><div class="line">case when a.IS_NULLABLE=&apos;yes&apos; then &apos;√&apos;else &apos;&apos; end as &apos;允许空值&apos;,</div><div class="line">case when a.COLUMN_DEFAULT=&apos;&apos; then &apos;&quot;&quot;&apos; else a.COLUMN_DEFAULT end  as &apos;默认值&apos;,</div><div class="line">a.CHARACTER_SET_NAME as &apos;字符集&apos;,</div><div class="line">a.COLLATION_NAME as &apos;整理&apos;,</div><div class="line">a.EXTRA as &apos;自动递增&apos;,</div><div class="line">case when b.CONSTRAINT_NAME=&apos;PRIMARY&apos;  then &apos;PRIMARY&apos; else &apos;&apos; end  as &apos;主键&apos;,</div><div class="line">c.CONSTRAINT_NAME  as &apos;外键名&apos;,</div><div class="line">c.REFERENCED_TABLE_NAME as &apos;关联父表&apos;,</div><div class="line">c.REFERENCED_COLUMN_NAME as &apos;父表字段&apos;,</div><div class="line">d. CONSTRAINT_NAME as &apos;索引名称&apos;</div><div class="line">from INFORMATION_SCHEMA.COLUMNS as a</div><div class="line">left join (select CONSTRAINT_NAME,TABLE_NAME table_name2,COLUMN_NAME col_name2 from INFORMATION_SCHEMA .KEY_COLUMN_USAGE where  CONSTRAINT_NAME=&apos;PRIMARY&apos; and table_name like &apos;idsm%&apos;) as b</div><div class="line">on a.TABLE_NAME=b.table_name2 and a.COLUMN_NAME=b.col_name2</div><div class="line">left join (select CONSTRAINT_NAME,REFERENCED_TABLE_NAME,REFERENCED_COLUMN_NAME,TABLE_NAME table_name3,COLUMN_NAME col_name3 from INFORMATION_SCHEMA .KEY_COLUMN_USAGE where REFERENCED_COLUMN_NAME!=&apos;&apos; and table_name like &apos;idsm%&apos;) as c</div><div class="line">on a.TABLE_NAME=c.table_name3 and a.COLUMN_NAME=c.col_name3</div><div class="line">left join (select CONSTRAINT_NAME,REFERENCED_TABLE_NAME,REFERENCED_COLUMN_NAME,TABLE_NAME table_name4,COLUMN_NAME col_name4 from INFORMATION_SCHEMA .KEY_COLUMN_USAGE where REFERENCED_COLUMN_NAME is null and CONSTRAINT_NAME!=&apos;PRIMARY&apos; and table_name like &apos;idsm%&apos;)</div><div class="line">as d</div><div class="line">on a.TABLE_NAME=d.table_name4 and a.COLUMN_NAME=d.col_name4</div><div class="line">where table_name like &apos;idsm%&apos;</div></pre></td></tr></table></figure>
+<h5 id="备注">备注</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">运行的时候请注意where条件</div></pre></td></tr></table></figure>
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/DB/">DB</a></li></ul>
 	</div>
 
       
