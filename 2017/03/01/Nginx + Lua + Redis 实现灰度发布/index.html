@@ -11,7 +11,7 @@
 <meta property="og:url" content="http://yunops.top/2017/03/01/Nginx + Lua + Redis 实现灰度发布/index.html">
 <meta property="og:site_name" content="运维小站">
 <meta property="og:description" content="本方法可以实现根据用户id判断，是否分发到灰度环境proxy_a,proxy_b根据实际需求调整lua代码123456789101112131415161718192021222324252627282930313233--[[amour]]----[[引入redis模块]]--local redis = require &quot;resty.redis&quot;--[[获取cookie为uid的浏览器数据]]-">
-<meta property="og:updated_time" content="2017-04-27T08:53:41.000Z">
+<meta property="og:updated_time" content="2017-04-28T07:23:10.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Nginx + Lua + Redis 实现灰度发布">
 <meta name="twitter:description" content="本方法可以实现根据用户id判断，是否分发到灰度环境proxy_a,proxy_b根据实际需求调整lua代码123456789101112131415161718192021222324252627282930313233--[[amour]]----[[引入redis模块]]--local redis = require &quot;resty.redis&quot;--[[获取cookie为uid的浏览器数据]]-">
@@ -117,7 +117,7 @@
 				
 				<section class="switch-part switch-part2">
 					<div class="widget tagcloud" id="js-tagcloud">
-						<a href="/tags/OPS/" style="font-size: 10px;">OPS</a>
+						<a href="/tags/DB/" style="font-size: 10px;">DB</a> <a href="/tags/MAC/" style="font-size: 10px;">MAC</a> <a href="/tags/OPS/" style="font-size: 20px;">OPS</a>
 					</div>
 				</section>
 				
@@ -227,16 +227,8 @@
     <div class="article-entry" itemprop="articleBody">
       
         <h5 id="本方法可以实现根据用户id判断，是否分发到灰度环境">本方法可以实现根据用户id判断，是否分发到灰度环境</h5><h5 id="proxy_a,proxy_b根据实际需求调整">proxy_a,proxy_b根据实际需求调整</h5><h4 id="lua代码">lua代码</h4><figure class="highlight lua"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div></pre></td><td class="code"><pre><div class="line"><span class="comment">--[[amour]]</span><span class="comment">--</span></div><div class="line"><span class="comment">--[[引入redis模块]]</span><span class="comment">--</span></div><div class="line"><span class="keyword">local</span> redis = <span class="built_in">require</span> <span class="string">"resty.redis"</span></div><div class="line"></div><div class="line"><span class="comment">--[[获取cookie为uid的浏览器数据]]</span><span class="comment">--</span></div><div class="line"><span class="keyword">local</span> uid, err = ngx.var.cookie_uid</div><div class="line"><span class="keyword">if</span> <span class="keyword">not</span> uid <span class="keyword">then</span></div><div class="line">	ngx.exec(<span class="string">"@proxy_b"</span>)</div><div class="line">	ngx.log(ngx.ERR, err)</div><div class="line"><span class="keyword">end</span></div><div class="line"></div><div class="line"><span class="comment">--[[链接redis获取数据]]</span><span class="comment">--</span></div><div class="line">redis:set_timeout(<span class="number">1000</span>)</div><div class="line"><span class="keyword">local</span> cache, err= redis.new()</div><div class="line">cache.connect(cache, <span class="string">'ip'</span>, <span class="string">'6379'</span>)</div><div class="line"><span class="keyword">if</span> <span class="keyword">not</span> cache <span class="keyword">then</span></div><div class="line">	ngx.exec(<span class="string">"@proxy_b"</span>)</div><div class="line">	ngx.log(ngx.ERR, err)</div><div class="line"><span class="keyword">end</span></div><div class="line"></div><div class="line"><span class="comment">--[[校对数据]]</span><span class="comment">--</span></div><div class="line"><span class="keyword">local</span> res, err = cache:get(<span class="string">"uid"</span>)</div><div class="line"><span class="keyword">if</span> <span class="keyword">not</span> res <span class="keyword">then</span></div><div class="line">	ngx.exec(<span class="string">"@proxy_b"</span>)</div><div class="line">	ngx.log(ngx.ERR, err)</div><div class="line"><span class="keyword">end</span></div><div class="line"></div><div class="line"><span class="keyword">local</span> regex = uid</div><div class="line"><span class="keyword">local</span> m = ngx.re.match(res, regex)</div><div class="line"><span class="keyword">if</span> m <span class="keyword">then</span></div><div class="line">	ngx.exec(<span class="string">"@proxy_a"</span>)</div><div class="line">	<span class="keyword">else</span> ngx.exec(<span class="string">"@proxy_b"</span>)</div><div class="line"><span class="keyword">end</span></div></pre></td></tr></table></figure>
-<h4 id="nginx_配置">nginx 配置</h4><h5 id="配置分发信息">配置分发信息</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">upstream proxy_a &#123;</div><div class="line">    server xxx.xxx.xxx.xxx:port;</div><div class="line">&#125;</div><div class="line"></div><div class="line">upstream proxy_b &#123;</div><div class="line">    server xxx.xxx.xxx.xxx:port;</div><div class="line">&#125;</div><div class="line">#####网站配置</div></pre></td></tr></table></figure>
-<pre><code><span class="tag">location</span> <span class="at_rule">@<span class="keyword">proxy_a</span> </span>{
-        <span class="tag">proxy_pass</span> <span class="rule"><span class="attribute">http</span>:<span class="value">//proxy_a</span></span>;
-}
-
-<span class="tag">location</span> <span class="at_rule">@<span class="keyword">proxy_b</span> </span>{
-        <span class="tag">proxy_pass</span> <span class="rule"><span class="attribute">http</span>:<span class="value">//proxy_b</span></span>;
-}
-</code></pre><p>```</p>
-
+<h4 id="nginx_配置">nginx 配置</h4><h5 id="配置分发信息">配置分发信息</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">upstream proxy_a &#123;</div><div class="line">    server xxx.xxx.xxx.xxx:port;</div><div class="line">&#125;</div><div class="line"></div><div class="line">upstream proxy_b &#123;</div><div class="line">    server xxx.xxx.xxx.xxx:port;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h5 id="网站配置">网站配置</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">location @proxy_a &#123;</div><div class="line">        proxy_pass http://proxy_a;</div><div class="line">&#125;</div><div class="line"></div><div class="line">location @proxy_b &#123;</div><div class="line">        proxy_pass http://proxy_b;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
       
     </div>
     
@@ -245,9 +237,18 @@
     
 <nav id="article-nav">
   
+    <a href="/2017/06/18/mac ramdisk/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption"><</strong>
+      <div class="article-nav-title">
+        
+          mac ramdisk
+        
+      </div>
+    </a>
   
-    <a href="/2016/07/04/beanstalkd性能监控脚本/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">beanstalkd性能监控脚本</div>
+  
+    <a href="/2017/02/04/nginx-http2-安装脚本/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">nginx-http2-安装脚本</div>
       <strong class="article-nav-caption">></strong>
     </a>
   
